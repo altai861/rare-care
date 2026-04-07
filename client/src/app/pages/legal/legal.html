@@ -1,0 +1,26 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ title() }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <h1>{{ title() }}</h1>
+        <p>{{ description() }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+  <section class="container section prose-panel">
+    @for (paragraph of paragraphs(); track paragraph) {
+      <p>{{ paragraph }}</p>
+    }
+  </section>
+</div>

@@ -1,0 +1,619 @@
+{
+  "diseases": [
+    {
+      "id": "ackerman-mn",
+      "slug": "ackerman-syndrome",
+      "name": "Аккерманы хам шинж",
+      "aliases": [
+        "Ackerman syndrome",
+        "Palato-digital syndrome"
+      ],
+      "category": "Генетикийн өвчин",
+      "shortDescription": "Ховор тохиолддог, нүүр ам болон мөчдийн хөгжилтэй холбоотой шинжүүдээр илэрч болох генетикийн хам шинж.",
+      "summaryMedical": "Аккерманы хам шинж нь төрөлхийн хөгжлийн олон шинжийг хамтатган илэрч болзошгүй ховор хам шинж гэж тайлбарлагддаг. Илрэл нь хүн бүрт ялгаатай байж болох тул генетикийн үнэлгээ, өсөлт хөгжил, хэл яриа болон амьсгалын замын дэмжлэгт олон салбарын багийн оролцоо шаардлагатай.",
+      "summarySimple": "Энэ хам шинжтэй хүмүүсийн хэрэгцээ хүн бүрт өөр байдаг. Зарим хүнд амны хөндий, шүд, яриа эсвэл гар хөлтэй холбоотой дэмжлэг хэрэг болдог. Эрт үнэлгээ, тогтмол хяналт нь өдөр тутмын амьдралыг илүү тогтвортой болгоход тусалж болно.",
+      "causes": [
+        {
+          "title": "Генетикийн өөрчлөлт",
+          "description": "Удамшлын мэдээлэлд гарсан өөрчлөлт нь биеийн тодорхой хэсгүүдийн хөгжлийн явцад нөлөөлж болзошгүй. Гэр бүлийн түүхтэй эсэхийг генетикийн зөвлөгөөтэй хамт үнэлэх нь тустай."
+        },
+        {
+          "title": "Хөгжлийн үеийн ялгаатай байдал",
+          "description": "Ургийн хөгжлийн үе шат бүрт жижиг өөрчлөлтүүд хуримтлагдан илрэлд нөлөөлж болно. Энэ нь эцэг эхийн буруу үйлдлээс шалтгаалсан гэсэн үг биш."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Craniofacial differences",
+          "description": "Нүүр, эрүү, тагнай эсвэл шүдний байрлалд ялгаатай байдал ажиглагдаж болно.",
+          "synonyms": [
+            "Ам, нүүрний өөрчлөлт"
+          ],
+          "frequency": "Өөр өөр",
+          "bodySystem": "Толгой, хүзүү"
+        },
+        {
+          "medicalTerm": "Digital anomalies",
+          "description": "Хуруу, сарвуу эсвэл мөчдийн хэлбэр, хөдөлгөөнд ялгаатай байдал илэрч болно.",
+          "synonyms": [
+            "Мөчдийн өөрчлөлт"
+          ],
+          "frequency": "Өөр өөр",
+          "bodySystem": "Булчин, яс"
+        },
+        {
+          "medicalTerm": "Feeding or speech difficulties",
+          "description": "Зарим хүүхдэд хооллолт, авиалбар, хэл ярианы хөгжлийн нэмэлт дэмжлэг хэрэг болдог.",
+          "synonyms": [
+            "Ярианы саатал"
+          ],
+          "frequency": "Зарим тохиолдолд",
+          "bodySystem": "Хоол боловсруулах / хэл яриа"
+        }
+      ],
+      "references": [],
+      "locale": "mn",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "ackerman-en",
+      "slug": "ackerman-syndrome",
+      "name": "Ackerman Syndrome",
+      "aliases": [
+        "Palato-digital syndrome"
+      ],
+      "category": "Genetic diseases",
+      "shortDescription": "A rare syndrome that may involve craniofacial and limb development differences.",
+      "summaryMedical": "Ackerman syndrome is described as a rare congenital condition with variable developmental features. Presentation can differ widely, so care often benefits from coordinated review across genetics, growth and development, speech, and airway or dental support.",
+      "summarySimple": "People living with this condition can have different needs. Some may need help with feeding, speech, dental care, or hand and foot function. Early review and steady follow-up can make everyday care easier to plan.",
+      "causes": [
+        {
+          "title": "Genetic variation",
+          "description": "Changes in inherited genetic information may affect how certain tissues develop before birth. Genetic counseling can help families understand possible patterns."
+        },
+        {
+          "title": "Developmental differences",
+          "description": "Small differences during early development can lead to visible features later. This does not mean a parent caused the condition."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Craniofacial differences",
+          "description": "Differences in the face, jaw, palate, or tooth alignment may be present.",
+          "synonyms": [
+            "Facial or oral differences"
+          ],
+          "frequency": "Variable",
+          "bodySystem": "Head and neck"
+        },
+        {
+          "medicalTerm": "Digital anomalies",
+          "description": "Hands, fingers, or limbs may have shape or movement differences.",
+          "synonyms": [
+            "Limb differences"
+          ],
+          "frequency": "Variable",
+          "bodySystem": "Musculoskeletal"
+        },
+        {
+          "medicalTerm": "Feeding or speech difficulties",
+          "description": "Some children may need additional support for feeding, articulation, or communication development.",
+          "synonyms": [
+            "Speech delay"
+          ],
+          "frequency": "Some people",
+          "bodySystem": "Digestive / speech"
+        }
+      ],
+      "references": [],
+      "locale": "en",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "wilson-mn",
+      "slug": "wilson-disease",
+      "name": "Вилсоны өвчин",
+      "aliases": [
+        "Wilson disease",
+        "Copper storage disorder"
+      ],
+      "category": "Элэг, бодисын солилцооны өвчин",
+      "shortDescription": "Зэсийг биеэс зохицуулах чадварт нөлөөлж, элэг болон мэдрэлд хүндрэл үүсгэж болох удамшлын өвчин.",
+      "summaryMedical": "Вилсоны өвчин нь ATP7B гентэй холбоотой удамшлын шалтгаантай байж болох зэсийн солилцооны эмгэг юм. Элэг, төв мэдрэлийн тогтолцоо, нүд зэрэг эрхтэнд зэс хуримтлагдаж, лабораторийн шинжилгээ, дүрс оношилгоо болон тусгай эмчилгээг эрт эхлүүлэх шаардлага үүсч болзошгүй.",
+      "summarySimple": "Энэ өвчний үед бие махбодь зэсийг зөв боловсруулахгүй байж болно. Үүнээс болж элэг ядрах, хөдөлгөөн өөрчлөгдөх, сэтгэл санаа нөлөөлөх зэрэг асуудал гарч болно. Эрт оношлуулж, эмчийн хяналтанд тогтмол байх нь маш чухал.",
+      "causes": [
+        {
+          "title": "ATP7B генийн өөрчлөлт",
+          "description": "Энэ ген нь зэсийг биеэс гаргах үйл явцад оролцдог. Өөрчлөлт гарвал зэс элэг болон бусад эрхтэнд хуримтлагдаж болзошгүй."
+        },
+        {
+          "title": "Удамшлын хэв шинж",
+          "description": "Ихэвчлэн аутосомын рецессив хэлбэрээр удамшдаг тул гэр бүлийн бусад гишүүдэд шинжилгээ санал болгох шаардлага гарч болно."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Hepatic dysfunction",
+          "description": "Элэгний фермент өсөх, шарлалт, ядрах зэрэг шинж илэрч болно.",
+          "synonyms": [
+            "Элэгний өөрчлөлт"
+          ],
+          "frequency": "Түгээмэл",
+          "bodySystem": "Элэг"
+        },
+        {
+          "medicalTerm": "Tremor or movement changes",
+          "description": "Гар салгалах, хөдөлгөөн удаашрах, булчин хөшиж болох зэрэг шинж ажиглагдаж болно.",
+          "synonyms": [
+            "Хөдөлгөөний өөрчлөлт"
+          ],
+          "frequency": "Зарим хүмүүст",
+          "bodySystem": "Мэдрэл"
+        },
+        {
+          "medicalTerm": "Mood or behavior changes",
+          "description": "Сэтгэл түгших, уур амархан хүрэх, төвлөрөл өөрчлөгдөх зэрэг шинж гарч болно.",
+          "synonyms": [
+            "Сэтгэл зүйн шинж"
+          ],
+          "frequency": "Зарим хүмүүст",
+          "bodySystem": "Сэтгэц, мэдрэл"
+        }
+      ],
+      "references": [],
+      "locale": "mn",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "wilson-en",
+      "slug": "wilson-disease",
+      "name": "Wilson Disease",
+      "aliases": [
+        "Copper storage disorder"
+      ],
+      "category": "Gastrointestinal diseases",
+      "shortDescription": "An inherited disorder that affects copper handling and can impact the liver and nervous system.",
+      "summaryMedical": "Wilson disease is an inherited disorder, commonly associated with ATP7B variants, that disrupts copper transport and excretion. Copper can accumulate in the liver, nervous system, and other tissues, making early laboratory workup and longitudinal specialist follow-up important.",
+      "summarySimple": "In Wilson disease, the body may struggle to clear extra copper. This can affect the liver, movement, mood, or energy. Early diagnosis and regular treatment can reduce complications over time.",
+      "causes": [
+        {
+          "title": "ATP7B-related copper transport changes",
+          "description": "Changes in the ATP7B gene can impair the body's ability to move copper safely out of the liver."
+        },
+        {
+          "title": "Inherited pattern",
+          "description": "The condition is often inherited in an autosomal recessive pattern, so family screening may be part of care planning."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Hepatic dysfunction",
+          "description": "Abnormal liver tests, fatigue, jaundice, or abdominal symptoms may occur.",
+          "synonyms": [
+            "Liver changes"
+          ],
+          "frequency": "Common",
+          "bodySystem": "Liver"
+        },
+        {
+          "medicalTerm": "Tremor or movement changes",
+          "description": "People may notice tremor, stiffness, slower movement, or coordination changes.",
+          "synonyms": [
+            "Movement symptoms"
+          ],
+          "frequency": "Some people",
+          "bodySystem": "Neurologic"
+        },
+        {
+          "medicalTerm": "Mood or behavior changes",
+          "description": "Anxiety, irritability, or concentration changes can be part of the picture.",
+          "synonyms": [
+            "Behavior changes"
+          ],
+          "frequency": "Some people",
+          "bodySystem": "Mental health / neurologic"
+        }
+      ],
+      "references": [],
+      "locale": "en",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "thalassemia-mn",
+      "slug": "thalassemia",
+      "name": "Талассеми",
+      "aliases": [
+        "Thalassaemia",
+        "Цус багадалтын удамшлын хэлбэр"
+      ],
+      "category": "Цусны өвчин",
+      "shortDescription": "Гемоглобины бүтцэд нөлөөлж, архаг цус багадалт үүсгэж болох удамшлын бүлэг эмгэг.",
+      "summaryMedical": "Талассеми нь гемоглобины альфа эсвэл бета гинжний нийлэгжил буурахтай холбоотой удамшлын цусны эмгэгүүдийн бүлэг юм. Хөнгөнөөс хүнд хүртэл янз бүрийн хэлбэртэй бөгөөд зарим хүмүүст тогтмол цус сэлбэлт, төмрийн илүүдлийн хяналт хэрэг болдог.",
+      "summarySimple": "Энэ өвчний үед цус хүчилтөрөгчийг хэвийн зөөвөрлөхөд хүндрэлтэй байж болно. Үүнээс болж ядрах, амьсгаадах, өсөлт хоцрох зэрэг асуудал гарч болно. Зарим хүмүүст хөнгөн, заримд нь илүү их дэмжлэг шаардлагатай байдаг.",
+      "causes": [
+        {
+          "title": "Гемоглобины гений өөрчлөлт",
+          "description": "Цусны улаан эсийн гемоглобин үүсэх процессыг хариуцдаг генүүдэд өөрчлөлт гарснаар талассеми үүсч болно."
+        },
+        {
+          "title": "Гэр бүлийн удамшил",
+          "description": "Эцэг эхээс дамжих удамшлын онцлог нь өвчний хэлбэр болон хүндийн зэргийг тодорхойлж болно."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Chronic anemia",
+          "description": "Сульдах, цонхийх, амьсгаа давчдах зэрэг шинж удаан үргэлжилж болно.",
+          "synonyms": [
+            "Архаг цус багадалт"
+          ],
+          "frequency": "Түгээмэл",
+          "bodySystem": "Цус"
+        },
+        {
+          "medicalTerm": "Growth delay",
+          "description": "Хүүхдийн өсөлт, жин нэмэгдэх хурд удааширч болно.",
+          "synonyms": [
+            "Өсөлтийн хоцрогдол"
+          ],
+          "frequency": "Зарим хүүхдэд",
+          "bodySystem": "Ерөнхий хөгжил"
+        },
+        {
+          "medicalTerm": "Bone changes",
+          "description": "Ясны өөрчлөлт эсвэл дэлүү томрох зэрэг хүндрэлүүд ажиглагдаж болно.",
+          "synonyms": [
+            "Ясны хүндрэл"
+          ],
+          "frequency": "Хүнд хэлбэрт",
+          "bodySystem": "Яс, цус"
+        }
+      ],
+      "references": [],
+      "locale": "mn",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "thalassemia-en",
+      "slug": "thalassemia",
+      "name": "Thalassemia",
+      "aliases": [
+        "Thalassaemia"
+      ],
+      "category": "Blood diseases",
+      "shortDescription": "A group of inherited blood conditions that can reduce healthy hemoglobin production.",
+      "summaryMedical": "Thalassemia refers to inherited disorders of alpha or beta globin chain production. Severity ranges from asymptomatic carrier states to transfusion-dependent disease, and multidisciplinary monitoring may include hematology, iron status review, and growth support.",
+      "summarySimple": "Thalassemia can make it harder for red blood cells to carry oxygen well. That may lead to tiredness, shortness of breath, or slow growth. Some people have a mild form, while others need ongoing treatment.",
+      "causes": [
+        {
+          "title": "Hemoglobin gene changes",
+          "description": "Changes in the genes that help build hemoglobin can reduce how well red blood cells work."
+        },
+        {
+          "title": "Inherited family pattern",
+          "description": "Parents can pass these gene changes to their children, and the combination affects severity."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Chronic anemia",
+          "description": "Fatigue, pallor, or shortness of breath can develop over time.",
+          "synonyms": [
+            "Long-term anemia"
+          ],
+          "frequency": "Common",
+          "bodySystem": "Blood"
+        },
+        {
+          "medicalTerm": "Growth delay",
+          "description": "Children with more severe forms may grow more slowly.",
+          "synonyms": [
+            "Slow growth"
+          ],
+          "frequency": "Some children",
+          "bodySystem": "Development"
+        },
+        {
+          "medicalTerm": "Bone or spleen changes",
+          "description": "Bone changes or spleen enlargement may occur in more severe disease.",
+          "synonyms": [
+            "Skeletal changes"
+          ],
+          "frequency": "More severe cases",
+          "bodySystem": "Blood / musculoskeletal"
+        }
+      ],
+      "references": [],
+      "locale": "en",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "cystic-fibrosis-mn",
+      "slug": "cystic-fibrosis",
+      "name": "Цистик фиброз",
+      "aliases": [
+        "CF",
+        "Cystic fibrosis"
+      ],
+      "category": "Амьсгалын замын өвчин",
+      "shortDescription": "Уушги, хоол боловсруулах эрхтэнд нөлөөлж, өтгөн салс үүсгэж болох удамшлын өвчин.",
+      "summaryMedical": "Цистик фиброз нь CFTR гентэй холбоотой, шүүрлийн шингэний тэнцвэр алдагдах шалтгаантай архаг удамшлын эмгэг юм. Амьсгалын зам, нойр булчирхай, хоол боловсруулах системд нөлөөлж болох тул тогтмол амьсгалын замын менежмент, хоол тэжээлийн дэмжлэг шаарддаг.",
+      "summarySimple": "Энэ өвчний үед өтгөн салс уушги болон хоол боловсруулах эрхтэнд хуримтлагдаж болно. Үүнээс болж ханиалга удаан үргэлжлэх, жин нэмэхэд хүндрэлтэй байх, халдвар давтагдах зэрэг шинж илэрч болно. Өдөр тутмын арчилгаа тогтмол байх нь чухал.",
+      "causes": [
+        {
+          "title": "CFTR генийн өөрчлөлт",
+          "description": "Энэ ген нь биеийн шингэний давс, усны зохицуулалтад оролцдог. Өөрчлөлт гарвал салс өтгөрөх эрсдэлтэй."
+        },
+        {
+          "title": "Аутосомын рецессив удамшил",
+          "description": "Эцэг эх хоёул өөрчлөлтийг тээгч байх үед хүүхдэд өвчин илрэх магадлал нэмэгдэнэ."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Chronic cough",
+          "description": "Удаан үргэлжлэх ханиалга, салст ихсэх эсвэл амьсгаадах шинж илэрч болно.",
+          "synonyms": [
+            "Архаг ханиалга"
+          ],
+          "frequency": "Түгээмэл",
+          "bodySystem": "Амьсгалын зам"
+        },
+        {
+          "medicalTerm": "Frequent lung infections",
+          "description": "Амьсгалын замын халдвар ойр ойрхон давтагдах боломжтой.",
+          "synonyms": [
+            "Давтамжтай халдвар"
+          ],
+          "frequency": "Түгээмэл",
+          "bodySystem": "Уушги"
+        },
+        {
+          "medicalTerm": "Poor weight gain",
+          "description": "Хоол боловсруулалт доголдсоноор жин нэмэгдэхгүй байх, өтгөний өөрчлөлт ажиглагдаж болно.",
+          "synonyms": [
+            "Жин муу нэмэх"
+          ],
+          "frequency": "Зарим хүмүүст",
+          "bodySystem": "Хоол боловсруулах"
+        }
+      ],
+      "references": [],
+      "locale": "mn",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    },
+    {
+      "id": "cystic-fibrosis-en",
+      "slug": "cystic-fibrosis",
+      "name": "Cystic Fibrosis",
+      "aliases": [
+        "CF"
+      ],
+      "category": "Respiratory diseases",
+      "shortDescription": "An inherited condition that can cause thick mucus in the lungs and digestive system.",
+      "summaryMedical": "Cystic fibrosis is an inherited multisystem disorder associated with CFTR dysfunction and abnormal epithelial ion transport. It commonly affects respiratory and gastrointestinal function, making coordinated pulmonary, nutritional, and infection management important.",
+      "summarySimple": "Cystic fibrosis can cause thick mucus to build up in the lungs and digestive tract. This may lead to coughing, repeated infections, and difficulty gaining weight. Daily treatment routines often play a big role in staying well.",
+      "causes": [
+        {
+          "title": "CFTR-related changes",
+          "description": "Changes in the CFTR gene affect salt and water movement across cells, which can thicken mucus."
+        },
+        {
+          "title": "Inherited recessive pattern",
+          "description": "The condition usually appears when a child inherits a CFTR change from both parents."
+        }
+      ],
+      "symptoms": [
+        {
+          "medicalTerm": "Chronic cough",
+          "description": "A long-lasting cough with mucus or shortness of breath may be present.",
+          "synonyms": [
+            "Persistent cough"
+          ],
+          "frequency": "Common",
+          "bodySystem": "Respiratory"
+        },
+        {
+          "medicalTerm": "Frequent lung infections",
+          "description": "Chest infections can return often without ongoing management.",
+          "synonyms": [
+            "Repeated infections"
+          ],
+          "frequency": "Common",
+          "bodySystem": "Lungs"
+        },
+        {
+          "medicalTerm": "Poor weight gain",
+          "description": "Digestive challenges may make weight gain and nutrient absorption harder.",
+          "synonyms": [
+            "Nutrition concerns"
+          ],
+          "frequency": "Some people",
+          "bodySystem": "Digestive"
+        }
+      ],
+      "references": [],
+      "locale": "en",
+      "published": true,
+      "updatedAt": "2026-03-26T00:00:00.000Z"
+    }
+  ],
+  "dailyCornerEntries": [
+    {
+      "id": "daily-2026-03-10-mn",
+      "date": "2026-03-10",
+      "title": "Өдрийн булан",
+      "quote": "Өвчин бол таны бүхэл бүтэн түүх биш.",
+      "body": "Ховор өвчинтэй амьдрах үед айдас, бухимдал, тодорхойгүй байдал зэрэг олон мэдрэмж зэрэгцэн ирдэг. Өөрийгөө зөөлөн сонсож, тухайн өдрийн хэрэгцээгээ хэт шүүхгүйгээр анзаарах нь сэргэх хүчийг хамгаалдаг.",
+      "reminderTitle": "Өнөөдрийн сануулга",
+      "reminderBody": "Амгалан байх нь зүгээр суух гэсэн үг биш. Энэ нь өөрийнхөө хэмнэлийг хүндэтгэх тухай юм.",
+      "image": "calm",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "daily-2026-03-11-mn",
+      "date": "2026-03-11",
+      "title": "Өдрийн булан",
+      "quote": "Бие заримдаа таны өмнөөс ярьдаг.",
+      "body": "Ядаргаа, өвдөлт, нойргүйдэл нь зөвхөн биеийн шинж тэмдэг биш байж болно. Зарим өдөр бидэнд удаашрах, тусламж хүсэх, амралтаа хамгаалах дохио өгч байдаг.",
+      "reminderTitle": "Өнөөдрийн сануулга",
+      "reminderBody": "Шинж тэмдэг бүрийг даван туулах ёстой дайсан гэж харахын оронд, юу хэрэгтэй байгааг ойлгуулах дохио гэж харж болно.",
+      "image": "listen",
+      "audioUrl": "/audio/daily-corner-placeholder.mp3",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "daily-2026-03-12-mn",
+      "date": "2026-03-12",
+      "title": "Өдрийн булан",
+      "quote": "Тавгүй мэдрэмж ч гэсэн утга агуулдаг.",
+      "body": "Заримдаа таагүй байдал нь буруу зүйл болж байна гэсэн дохио биш, харин бидний хэт их ачаалалтай байгааг сануулдаг. Өөрийгөө буруутгахгүйгээр хил хязгаараа тогтоох нь хамгаалалт болдог.",
+      "reminderTitle": "Өнөөдрийн сануулга",
+      "reminderBody": "Өнөөдөр ганц жижиг амралтын цэг гарга. Богино алхалт, ус уух, эсвэл хэн нэгэнд мессеж бичих байж болно.",
+      "image": "balance",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "daily-2026-03-10-en",
+      "date": "2026-03-10",
+      "title": "Daily Corner Insight",
+      "quote": "The illness is not the whole of your story.",
+      "body": "Living with a rare condition can bring fear, anger, and uncertainty into the same day. Taking a moment to notice what you need without judging yourself can protect energy for healing and connection.",
+      "reminderTitle": "Today's reminder",
+      "reminderBody": "Peace does not mean doing nothing. It can mean respecting your current pace.",
+      "image": "calm",
+      "locale": "en",
+      "published": true
+    },
+    {
+      "id": "daily-2026-03-11-en",
+      "date": "2026-03-11",
+      "title": "Daily Corner Insight",
+      "quote": "Sometimes the body speaks before words arrive.",
+      "body": "Pain, fatigue, or poor sleep may be more than isolated symptoms. On some days they are signals that more rest, support, or gentleness is needed.",
+      "reminderTitle": "Today's reminder",
+      "reminderBody": "You do not have to fight every sensation. Some are cues to slow down and care differently.",
+      "image": "listen",
+      "audioUrl": "/audio/daily-corner-placeholder.mp3",
+      "locale": "en",
+      "published": true
+    },
+    {
+      "id": "daily-2026-03-12-en",
+      "date": "2026-03-12",
+      "title": "Daily Corner Insight",
+      "quote": "Discomfort can still carry meaning.",
+      "body": "At times, discomfort is not a verdict that you are failing. It may be a sign that your limits need protection and your routines need adjusting.",
+      "reminderTitle": "Today's reminder",
+      "reminderBody": "Make room for one small pause today. A glass of water, a short walk, or a message to someone safe is enough.",
+      "image": "balance",
+      "locale": "en",
+      "published": true
+    }
+  ],
+  "events": [
+    {
+      "id": "event-community-forum-mn",
+      "title": "Ховор өвчний гэр бүлийн уулзалт",
+      "summary": "Асран хамгаалагчид болон өвчтөнүүдэд зориулсан танилцах, мэдээлэл солилцох уулзалт.",
+      "description": "Улаанбаатар хотод зохион байгуулагдах энэ уулзалт нь гэр бүлүүдийг холбож, практик дэмжлэгийн туршлага хуваалцахад чиглэнэ.",
+      "date": "2026-04-12",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "organizer": "Rare Care Mongolia",
+      "location": "Улаанбаатар, Олон нийтийн төв",
+      "image": "forum",
+      "link": "#",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "event-clinic-webinar-mn",
+      "title": "Эмчийн онлайн ярилцлага",
+      "summary": "Онош баталгаажуулах үед асуух асуултуудын талаар шууд вебинар.",
+      "description": "Генетикийн зөвлөгөө, шинжилгээний хариу, дараагийн алхамын талаар тайлбарлана.",
+      "date": "2026-04-26",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "organizer": "Rare Care + сайн дурын эмч нар",
+      "location": "Zoom",
+      "image": "webinar",
+      "link": "#",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "event-fundraiser-mn",
+      "title": "Хандивын өдөр",
+      "summary": "Тусламж хэрэгтэй гэр бүлүүдийн эмчилгээний зардлыг дэмжих хандивын аян.",
+      "description": "Өдөрлөгийн үеэр түүх хуваалцах, сайн дурынхан бүртгэх, санхүүгийн тусламжийн замуудыг тайлбарлана.",
+      "date": "2026-05-08",
+      "startTime": "11:00",
+      "endTime": "17:00",
+      "organizer": "Rare Care Mongolia",
+      "location": "Сүхбаатарын талбай",
+      "image": "fundraiser",
+      "link": "#",
+      "locale": "mn",
+      "published": true
+    },
+    {
+      "id": "event-community-forum-en",
+      "title": "Rare Disease Family Gathering",
+      "summary": "A connection-focused meet-up for patients, caregivers, and families in Mongolia.",
+      "description": "This in-person gathering centers practical support, shared lived experience, and calmer care planning.",
+      "date": "2026-04-12",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "organizer": "Rare Care Mongolia",
+      "location": "Ulaanbaatar Community Center",
+      "image": "forum",
+      "link": "#",
+      "locale": "en",
+      "published": true
+    },
+    {
+      "id": "event-clinic-webinar-en",
+      "title": "Clinician Q&A Webinar",
+      "summary": "A live online session on questions families can ask during diagnosis and follow-up.",
+      "description": "The webinar covers genetics visits, lab interpretation, and what coordinated care can look like after diagnosis.",
+      "date": "2026-04-26",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "organizer": "Rare Care + volunteer clinicians",
+      "location": "Zoom",
+      "image": "webinar",
+      "link": "#",
+      "locale": "en",
+      "published": true
+    },
+    {
+      "id": "event-fundraiser-en",
+      "title": "Community Fundraising Day",
+      "summary": "A support event to help families facing treatment and travel costs.",
+      "description": "The day includes storytelling, volunteer sign-ups, and guided information on available support pathways.",
+      "date": "2026-05-08",
+      "startTime": "11:00",
+      "endTime": "17:00",
+      "organizer": "Rare Care Mongolia",
+      "location": "Sukhbaatar Square",
+      "image": "fundraiser",
+      "link": "#",
+      "locale": "en",
+      "published": true
+    }
+  ],
+  "donationSubmissions": [],
+  "contactMessages": [],
+  "users": []
+}

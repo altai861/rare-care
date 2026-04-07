@@ -1,0 +1,52 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.dailyCorner }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <p class="eyebrow">{{ dictionary.nav.dailyCorner }}</p>
+        <h1>{{ dictionary.dailyCorner.title }}</h1>
+        <p>{{ dictionary.dailyCorner.body }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+  <section class="container section daily-list">
+    @for (entry of entries; track entry.id; let index = $index) {
+      <article class="daily-entry" [class.is-reversed]="reversed(index)">
+        <div class="daily-illustration tone-{{ entry.image || 'calm' }}">
+          <div class="daily-figure"></div>
+        </div>
+        <div class="daily-copy">
+          <p class="daily-date">{{ formatDate(entry.date) }}</p>
+          <h2>{{ entry.title }}</h2>
+          @if (entry.quote) {
+            <blockquote>{{ entry.quote }}</blockquote>
+          }
+          <p>{{ entry.body }}</p>
+          @if (entry.reminderTitle || entry.reminderBody) {
+            <div class="reminder-box">
+              @if (entry.reminderTitle) {
+                <h3>{{ entry.reminderTitle }}</h3>
+              }
+              @if (entry.reminderBody) {
+                <p>{{ entry.reminderBody }}</p>
+              }
+            </div>
+          }
+          @if (entry.audioUrl) {
+            <a class="audio-link" [href]="entry.audioUrl">♫ {{ dictionary.common.audio }}</a>
+          }
+        </div>
+      </article>
+    }
+  </section>
+</div>

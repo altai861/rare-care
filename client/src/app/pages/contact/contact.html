@@ -1,0 +1,72 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.contact }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <p class="eyebrow">{{ dictionary.nav.contact }}</p>
+        <h1>{{ dictionary.contact.title }}</h1>
+        <p>{{ dictionary.contact.body }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+  <section class="container section contact-layout">
+    <form class="contact-form form-panel" (ngSubmit)="submit()">
+      <div class="two-column-grid">
+        <div class="field-group">
+          <label for="contact-name">{{ dictionary.contact.name }}</label
+          ><input id="contact-name" name="name" [(ngModel)]="form.name" />
+        </div>
+        <div class="field-group">
+          <label for="contact-email">{{ dictionary.contact.email }}</label
+          ><input id="contact-email" name="email" type="email" [(ngModel)]="form.email" />
+        </div>
+        <div class="field-group full-width">
+          <label for="contact-subject">{{ dictionary.contact.subject }}</label
+          ><input id="contact-subject" name="subject" [(ngModel)]="form.subject" />
+        </div>
+        <div class="field-group full-width">
+          <label for="contact-message">{{ dictionary.contact.message }}</label
+          ><textarea
+            id="contact-message"
+            name="message"
+            rows="6"
+            [(ngModel)]="form.message"
+          ></textarea>
+        </div>
+      </div>
+      <button
+        class="primary-button submit-button"
+        type="submit"
+        [disabled]="!isValid() || isSubmitting"
+      >
+        {{ isSubmitting ? dictionary.common.sending : dictionary.common.submit }}
+      </button>
+      @if (feedback) {
+        <div class="form-feedback is-success">
+          <p>{{ feedback }}</p>
+        </div>
+      }
+    </form>
+    <aside class="content-panel is-soft">
+      <h2>{{ dictionary.contact.organization }}</h2>
+      <p>{{ locale === 'mn' ? 'Имэйл: support@rarecare.mn' : 'Email: support@rarecare.mn' }}</p>
+      <p>
+        {{
+          locale === 'mn'
+            ? 'Улаанбаатар хот дахь гэр бүл, асран хамгаалагч, сайн дурынхны хамтын сүлжээ.'
+            : 'A collaborative network of families, caregivers, and volunteers based in Ulaanbaatar.'
+        }}
+      </p>
+    </aside>
+  </section>
+</div>

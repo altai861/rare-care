@@ -1,0 +1,80 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span
+      ><span>{{ dictionary.nav.diseaseInformation }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <p class="eyebrow">{{ dictionary.nav.diseaseInformation }}</p>
+        <h1>{{ dictionary.diseases.listingTitle }}</h1>
+        <p>{{ dictionary.diseases.listingBody }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <form class="filter-panel" (ngSubmit)="search()">
+      <div class="field-group">
+        <label for="query">{{ dictionary.diseases.searchLabel }}</label
+        ><input
+          id="query"
+          name="query"
+          type="search"
+          [(ngModel)]="query"
+          [placeholder]="dictionary.nav.searchPlaceholder"
+        />
+      </div>
+      <div class="field-group">
+        <label for="category">{{ dictionary.diseases.categoryLabel }}</label
+        ><select id="category" name="category" [(ngModel)]="category">
+          <option value="all">{{ dictionary.common.allCategories }}</option>
+          @for (item of categories; track item) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="sort">{{ dictionary.diseases.sortLabel }}</label
+        ><select id="sort" name="sort" [(ngModel)]="sort">
+          <option value="name">{{ dictionary.diseases.sortName }}</option>
+          <option value="updated">{{ dictionary.diseases.sortUpdated }}</option>
+        </select>
+      </div>
+      <div class="filter-actions">
+        <button class="primary-button" type="submit">{{ dictionary.common.search }}</button
+        ><button class="secondary-button" type="button" (click)="reset()">
+          {{ dictionary.common.reset }}
+        </button>
+      </div>
+    </form>
+    <p class="disclaimer-note">{{ dictionary.common.educationalDisclaimer }}</p>
+    @if (diseases.length) {
+      <div class="disease-grid">
+        @for (disease of diseases; track disease.id) {
+          <article class="disease-card">
+            <div class="pill">{{ disease.category }}</div>
+            <h3>{{ disease.name }}</h3>
+            <p class="aliases">
+              <strong>{{ dictionary.diseases.aliases }}:</strong> {{ disease.aliases.join(', ') }}
+            </p>
+            <p>{{ disease.shortDescription }}</p>
+            <a [routerLink]="routeTo('/disease-information/' + disease.slug)">{{
+              dictionary.common.learnMore
+            }}</a>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">{{ dictionary.common.noResults }}</div>
+    }
+  </section>
+</div>

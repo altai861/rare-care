@@ -1,0 +1,142 @@
+<div class="site-root">
+  <header class="site-header">
+    <div class="container header-topline">
+      <a class="brand-link" [routerLink]="route()">
+        <span class="site-logo site-logo-medium"><img alt="Rare Care logo" src="/logo.png" /></span>
+        <span class="brand-wordmark"
+          ><strong>{{ dictionary.siteName }}</strong
+          ><span>{{ dictionary.common.siteRegion }}</span></span
+        >
+      </a>
+      <nav class="header-utility" aria-label="Top utility navigation">
+        @for (item of navTargets.slice(0, 4); track item.key) {
+          <a [routerLink]="route(item.path)">{{ item.label() }}</a>
+        }
+        <div class="header-toggles" role="group" aria-label="Display preferences">
+          <button
+            class="icon-toggle language-toggle"
+            type="button"
+            (click)="toggleLanguage()"
+            [attr.aria-label]="nextLanguageLabel()"
+          >
+            <img [src]="languageIcon()" alt="" />
+            <span>{{ locale === 'mn' ? 'MN' : 'EN' }}</span>
+          </button>
+          <button
+            class="icon-toggle theme-toggle"
+            type="button"
+            (click)="toggleTheme()"
+            [attr.aria-label]="nextThemeLabel()"
+          >
+            <img [src]="themeIcon()" alt="" />
+            <span>{{ themeMode === 'light' ? 'Light' : 'Dark' }}</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="container header-main">
+      <nav class="header-nav" aria-label="Primary">
+        @for (item of navTargets.slice(4); track item.key) {
+          <a [routerLink]="route(item.path)" routerLinkActive="is-active">{{ item.label() }}</a>
+        }
+        <a class="donate-link" [routerLink]="route('/donation')" routerLinkActive="is-active">{{
+          dictionary.nav.donate
+        }}</a>
+      </nav>
+      <form class="header-search" role="search" (ngSubmit)="submitSearch()">
+        <label class="sr-only" for="header-search">{{ dictionary.common.search }}</label>
+        <input
+          id="header-search"
+          name="query"
+          type="search"
+          [(ngModel)]="searchQuery"
+          [placeholder]="dictionary.nav.searchPlaceholder"
+        />
+        <button [attr.aria-label]="dictionary.common.search" type="submit">⌕</button>
+      </form>
+      <button
+        class="mobile-menu-toggle"
+        type="button"
+        [attr.aria-expanded]="menuOpen"
+        [attr.aria-label]="menuOpen ? dictionary.common.closeMenu : dictionary.common.openMenu"
+        (click)="toggleMenu()"
+      >
+        {{ menuOpen ? 'X' : '☰' }}
+      </button>
+    </div>
+    @if (menuOpen) {
+      <div class="mobile-panel">
+        <div class="container mobile-panel-inner">
+          @for (item of navTargets; track item.key) {
+            <a [routerLink]="route(item.path)">{{ item.label() }}</a>
+          }
+          <a [routerLink]="route('/donation')">{{ dictionary.nav.donate }}</a>
+          <div class="header-toggles mobile-header-toggles" role="group" aria-label="Display preferences">
+            <button
+              class="icon-toggle language-toggle"
+              type="button"
+              (click)="toggleLanguage()"
+              [attr.aria-label]="nextLanguageLabel()"
+            >
+              <img [src]="languageIcon()" alt="" />
+              <span>{{ locale === 'mn' ? 'MN' : 'EN' }}</span>
+            </button>
+            <button
+              class="icon-toggle theme-toggle"
+              type="button"
+              (click)="toggleTheme()"
+              [attr.aria-label]="nextThemeLabel()"
+            >
+              <img [src]="themeIcon()" alt="" />
+              <span>{{ themeMode === 'light' ? 'Light' : 'Dark' }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </header>
+
+  <main>
+    <router-outlet />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="site-logo site-logo-large"><img alt="Rare Care logo" src="/logo.png" /></span>
+        <div>
+          <h2>{{ dictionary.siteName }}</h2>
+          <p>{{ dictionary.footer.tagline }}</p>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.quickLinks }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route()">{{ dictionary.common.home }}</a
+          ><a [routerLink]="route('/disease-information')">{{
+            dictionary.nav.diseaseInformation
+          }}</a
+          ><a [routerLink]="route('/events')">{{ dictionary.nav.events }}</a
+          ><a [routerLink]="route('/daily-corner')">{{ dictionary.nav.dailyCorner }}</a>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.support }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route('/community')">{{ dictionary.nav.community }}</a
+          ><a [routerLink]="route('/donation')">{{ dictionary.nav.donate }}</a
+          ><a [routerLink]="route('/contact')">{{ dictionary.nav.contact }}</a
+          ><a [routerLink]="route('/accessibility')">{{ dictionary.nav.accessibility }}</a>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.legal }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route('/privacy-policy')">{{ dictionary.footer.privacy }}</a
+          ><a [routerLink]="route('/disclaimer')">{{ dictionary.footer.disclaimer }}</a
+          ><a [routerLink]="route('/accessibility')">{{ dictionary.footer.accessibility }}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

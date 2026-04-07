@@ -1,0 +1,102 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span
+      ><a [routerLink]="routeTo('/disease-information')">{{ dictionary.nav.diseaseInformation }}</a>
+      @if (disease) {
+        <span class="breadcrumb-separator">/</span><span>{{ disease.name }}</span>
+      }
+    </nav>
+  </div>
+  @if (disease) {
+    <section class="page-hero">
+      <div class="container page-hero-inner">
+        <div class="page-hero-copy">
+          <h1>{{ disease.name }}</h1>
+          <p>{{ dictionary.diseases.aliases }}: {{ disease.aliases.join(', ') }}</p>
+        </div>
+        <div class="hero-figure">
+          <div class="hero-orbit"></div>
+          <div class="hero-person"></div>
+          <div class="hero-dome"></div>
+        </div>
+      </div>
+    </section>
+    <section class="container section">
+      <div class="disease-summary-grid">
+        <article class="content-panel">
+          <h2>{{ dictionary.diseases.medicalSummary }}</h2>
+          <p>{{ disease.summaryMedical }}</p>
+        </article>
+        <article class="content-panel is-soft">
+          <h2>{{ dictionary.diseases.simpleSummary }}</h2>
+          <p>{{ disease.summarySimple }}</p>
+          <div class="support-aside">
+            <strong>{{ dictionary.diseases.relatedSupport }}</strong>
+            <p>{{ dictionary.common.educationalDisclaimer }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="container section">
+      <div class="section-heading">
+        <h2>{{ dictionary.diseases.causes }}</h2>
+        <p>{{ disease.shortDescription }}</p>
+      </div>
+      <div class="cause-grid">
+        @for (cause of disease.causes; track cause.title) {
+          <article class="cause-card">
+            <div class="cause-visual" aria-hidden="true"></div>
+            <h3>{{ cause.title }}</h3>
+            <p>{{ cause.description }}</p>
+          </article>
+        }
+      </div>
+    </section>
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-heading light">
+          <h2>{{ dictionary.diseases.symptoms }}</h2>
+          <p>{{ dictionary.common.educationalDisclaimer }}</p>
+        </div>
+        <div class="symptoms-table-wrapper">
+          <table class="symptoms-table">
+            <thead>
+              <tr>
+                <th>{{ dictionary.diseases.symptomMedicalTerm }}</th>
+                <th>{{ dictionary.diseases.symptomDescription }}</th>
+                <th>{{ dictionary.diseases.symptomSynonyms }}</th>
+                <th>{{ dictionary.diseases.symptomFrequency }}</th>
+                <th>{{ dictionary.diseases.symptomSystem }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (symptom of disease.symptoms; track symptom.medicalTerm) {
+                <tr>
+                  <td>{{ symptom.medicalTerm }}</td>
+                  <td>{{ symptom.description }}</td>
+                  <td>{{ symptom.synonyms?.join(', ') || '-' }}</td>
+                  <td>{{ symptom.frequency || '-' }}</td>
+                  <td>{{ symptom.bodySystem || '-' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="container section">
+      <div class="detail-footer-bar">
+        <p>{{ dictionary.diseases.updated }}: {{ formatDate(disease.updatedAt) }}</p>
+        <a class="secondary-button" [routerLink]="routeTo('/donation')">{{
+          dictionary.common.makeDonation
+        }}</a>
+      </div>
+    </section>
+  } @else if (notFound) {
+    <section class="container section">
+      <div class="empty-state">{{ dictionary.common.notFound }}</div>
+    </section>
+  }
+</div>

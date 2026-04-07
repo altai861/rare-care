@@ -1,0 +1,59 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.events }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <p class="eyebrow">{{ dictionary.nav.events }}</p>
+        <h1>{{ dictionary.events.title }}</h1>
+        <p>{{ dictionary.events.body }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+  <section class="container section event-list">
+    @for (event of events; track event.id) {
+      <article class="event-card tone-{{ event.image || 'forum' }}">
+        <div class="event-poster" aria-hidden="true">
+          <span>{{
+            event.image === 'fundraiser' ? dictionary.nav.donate : dictionary.siteName
+          }}</span>
+        </div>
+        <div class="event-content">
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.summary }}</p>
+          <dl class="event-meta">
+            <div>
+              <dt>📅</dt>
+              <dd>
+                {{ formatDate(event.date) }}{{ event.startTime ? ' · ' + event.startTime : ''
+                }}{{ event.endTime ? '-' + event.endTime : '' }}
+              </dd>
+            </div>
+            @if (event.organizer) {
+              <div>
+                <dt>👥</dt>
+                <dd>{{ dictionary.events.organizer }}: {{ event.organizer }}</dd>
+              </div>
+            }
+            @if (event.location) {
+              <div>
+                <dt>⌖</dt>
+                <dd>{{ dictionary.events.location }}: {{ event.location }}</dd>
+              </div>
+            }
+          </dl>
+          <a [href]="event.link || '#'">{{ dictionary.events.register }}</a>
+        </div>
+      </article>
+    }
+  </section>
+</div>
