@@ -53,6 +53,14 @@ export type EventItem = {
   published: boolean;
 };
 
+export type EventRegistrationForm = {
+  name: string;
+  email: string;
+  phone?: string;
+  attendees: number;
+  note?: string;
+};
+
 export type DonationForm = {
   donationType: 'one_time' | 'monthly';
   amount: number;
@@ -83,7 +91,13 @@ export type AuthUser = {
   id: string;
   name: string;
   email: string;
+  profileImageUrl?: string;
   createdAt: string;
+};
+
+export type UpdateProfileForm = {
+  name: string;
+  profileImageUrl?: string;
 };
 
 export type LoginForm = {

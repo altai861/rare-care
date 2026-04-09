@@ -1,0 +1,15 @@
+.hero-stage-home {
+  min-height: 18rem;
+  aspect-ratio: 1280 / 430;
+}
+
+.hero-stage-home .home-hero-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 720px) {
+  .hero-stage-home {
+    aspect-ratio: 16 / 9;
+  }
+}

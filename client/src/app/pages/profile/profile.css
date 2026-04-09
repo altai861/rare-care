@@ -1,0 +1,101 @@
+.profile-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.profile-summary {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-avatar-shell {
+  display: grid;
+  place-items: center;
+  min-height: 18rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--panel-soft-gradient);
+  box-shadow: var(--shadow);
+}
+
+.profile-avatar {
+  width: min(100%, 13rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.72);
+  background: var(--panel-bg-strong);
+}
+
+.profile-meta {
+  gap: 0.65rem;
+}
+
+.profile-meta h2,
+.profile-meta p {
+  margin: 0;
+}
+
+.profile-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.profile-upload-shell {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-bg-strong);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.profile-upload-shell:hover {
+  transform: translateY(-1px);
+  border-color: var(--surface-deep);
+  background: var(--panel-bg);
+}
+
+.profile-upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: rgba(60, 124, 149, 0.12);
+  color: var(--surface-deep);
+  font-weight: 800;
+}
+
+.profile-upload-name {
+  min-width: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.profile-remove-photo {
+  justify-self: start;
+}
+
+@media (max-width: 980px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+}

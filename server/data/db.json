@@ -613,16 +613,33 @@
       "published": true
     }
   ],
+  "eventRegistrations": [],
   "donationSubmissions": [],
   "contactMessages": [],
   "users": [
     {
-      "id": "user-f9bb2c74-1793-4136-b852-ed4fa7cdfc85",
-      "name": "altai",
-      "email": "altai@gmail.com",
-      "passwordHash": "f64ca14704f5006ffee1b3f5593e7eb1:ec7a90e6e5f2e94069665b2d0291f596f2c242834b8c1d06dcc7f625135c66e426b74b479d21d2c8fe1fda42284ebce2bed5b77c23e972b9a1c2760780adc94e",
-      "createdAt": "2026-04-08T03:07:04.691Z"
+      "id": "user-33e5c36d-1621-418f-8cd8-82d987dc2a5d",
+      "name": "test",
+      "email": "bbyyydriver@gmail.com",
+      "profileImageUrl": "",
+      "passwordHash": "0c62f9382c9278da818a4b64ab5fd255:aeb3f167644b48a687c58b555d881d6d2ce3d3bfabf4a0fe42e6ca38bb996def8a115fcc18accffdb8a44a41d057a431ec5da1d971a79f5a5714afcf1a23be3b",
+      "createdAt": "2026-04-09T06:27:41.304Z"
+    },
+    {
+      "id": "user-c54bbe20-8f0a-4161-bfec-7bfc6611efc6",
+      "name": "nko",
+      "email": "nko@gmail.com",
+      "profileImageUrl": "/media/profile-images/user-c54bbe20-8f0a-4161-bfec-7bfc6611efc6-2bfec583-44c4-411e-9a98-ed51289658ac.png",
+      "passwordHash": "a00044b5ce67aee580c020c5b076f22b:a3c882937afa1cf41284223ac79e9ed468ac65fcb4fd8bdca41e2c4577b3581a6bf0eeab79b6c8d68a4e12925391d541a9278868d592beb9909b1c87de2b52da",
+      "createdAt": "2026-04-09T07:03:22.195Z"
     }
   ],
-  "authSessions": []
+  "authSessions": [
+    {
+      "id": "session-b0b82ffa-7e35-4fe4-84db-77b8709b3654",
+      "userId": "user-c54bbe20-8f0a-4161-bfec-7bfc6611efc6",
+      "token": "1411c4630d724cb386227df6cd606c1f33ba584e345db13583fc34aec5e93898",
+      "createdAt": "2026-04-09T07:03:22.195Z"
+    }
+  ]
 }

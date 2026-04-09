@@ -33,13 +33,26 @@
           </button>
         </div>
         @if (authUser) {
-          <div class="auth-inline">
-            <span class="auth-user-pill" [attr.title]="dictionary.auth.signedInAs + ': ' + authUser.email">
-              {{ authUser.name }}
-            </span>
-            <button class="auth-logout-button" type="button" (click)="logout()">
-              {{ dictionary.auth.logout }}
+          <div class="auth-menu" (click)="$event.stopPropagation()">
+            <button
+              class="auth-menu-trigger"
+              type="button"
+              [attr.aria-expanded]="authMenuOpen"
+              [attr.title]="dictionary.auth.signedInAs + ': ' + authUser.email"
+              (click)="toggleAuthMenu($event)"
+            >
+              <img class="auth-avatar" [src]="profileImage()" alt="" />
+              <span class="auth-menu-name">{{ authUser.name }}</span>
+              <span class="auth-menu-chevron" aria-hidden="true">▾</span>
             </button>
+            @if (authMenuOpen) {
+              <div class="auth-dropdown">
+                <a [routerLink]="route('/profile')" (click)="closeAuthMenu()">{{
+                  dictionary.auth.profile
+                }}</a>
+                <button type="button" (click)="logout()">{{ dictionary.auth.logout }}</button>
+              </div>
+            }
           </div>
         } @else {
           <div class="auth-inline">
@@ -108,10 +121,17 @@
             </button>
           </div>
           @if (authUser) {
+            <div class="mobile-account-panel">
+              <img class="auth-avatar" [src]="profileImage()" alt="" />
+              <div class="mobile-account-copy">
+                <strong>{{ authUser.name }}</strong>
+                <span>{{ authUser.email }}</span>
+              </div>
+            </div>
             <div class="auth-inline mobile-auth-inline">
-              <span class="auth-user-pill" [attr.title]="dictionary.auth.signedInAs + ': ' + authUser.email">
-                {{ authUser.name }}
-              </span>
+              <a class="auth-user-pill" [routerLink]="route('/profile')">
+                {{ dictionary.auth.profile }}
+              </a>
               <button class="auth-logout-button" type="button" (click)="logout()">
                 {{ dictionary.auth.logout }}
               </button>
@@ -314,16 +334,14 @@
         <div class="footer-links">
           <a [routerLink]="route('/community')">{{ dictionary.nav.community }}</a
           ><a [routerLink]="route('/donation')">{{ dictionary.nav.donate }}</a
-          ><a [routerLink]="route('/contact')">{{ dictionary.nav.contact }}</a
-          ><a [routerLink]="route('/accessibility')">{{ dictionary.nav.accessibility }}</a>
+          ><a [routerLink]="route('/contact')">{{ dictionary.nav.contact }}</a>
         </div>
       </div>
       <div>
         <h3>{{ dictionary.footer.legal }}</h3>
         <div class="footer-links">
           <a [routerLink]="route('/privacy-policy')">{{ dictionary.footer.privacy }}</a
-          ><a [routerLink]="route('/disclaimer')">{{ dictionary.footer.disclaimer }}</a
-          ><a [routerLink]="route('/accessibility')">{{ dictionary.footer.accessibility }}</a>
+          ><a [routerLink]="route('/disclaimer')">{{ dictionary.footer.disclaimer }}</a>
         </div>
       </div>
     </div>

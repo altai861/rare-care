@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { mkdir, unlink, writeFile } from 'node:fs/promises';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import cors from 'cors';
@@ -13,9 +14,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = Number(process.env.PORT || 3000);
 const validLocales = new Set(['mn', 'en']);
+const maxProfileImageBytes = 4 * 1024 * 1024;
+const profileImageMountPath = '/media/profile-images';
+const profileImagesDir = join(__dirname, 'data', 'profile-images');
+const supportedProfileImageExtensions = {
+  'image/gif': 'gif',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp'
+};
 
 app.use(cors({ origin: true }));
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '5mb' }));
 app.use(morgan('dev'));
 
 function resolveLocale(value) {
@@ -49,6 +59,7 @@ function sanitizeUser(user) {
     id: user.id,
     name: user.name,
     email: user.email,
+    profileImageUrl: user.profileImageUrl || '',
     createdAt: user.createdAt
   };
 }
@@ -84,6 +95,80 @@ function readAuthToken(request) {
   }
 
   return '';
+}
+
+function isStoredProfileImage(value) {
+  return String(value || '').startsWith(`${profileImageMountPath}/`);
+}
+
+async function deleteStoredProfileImage(imageUrl) {
+  if (!isStoredProfileImage(imageUrl)) {
+    return;
+  }
+
+  const fileName = basename(String(imageUrl || '').slice(profileImageMountPath.length));
+  if (!fileName) {
+    return;
+  }
+
+  try {
+    await unlink(join(profileImagesDir, fileName));
+  } catch (error) {
+    if (error?.code !== 'ENOENT') {
+      throw error;
+    }
+  }
+}
+
+async function saveProfileImage(dataUrl, userId) {
+  const match = String(dataUrl || '').match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,([a-zA-Z0-9+/=]+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, mimeType, base64Data] = match;
+  const extension = supportedProfileImageExtensions[mimeType.toLowerCase()];
+  if (!extension) {
+    return null;
+  }
+
+  const buffer = Buffer.from(base64Data, 'base64');
+  if (!buffer.length || buffer.length > maxProfileImageBytes) {
+    return null;
+  }
+
+  await mkdir(profileImagesDir, { recursive: true });
+
+  const fileName = `${userId}-${crypto.randomUUID()}.${extension}`;
+  await writeFile(join(profileImagesDir, fileName), buffer);
+  return `${profileImageMountPath}/${fileName}`;
+}
+
+async function persistUserProfileImage(user, profileImageUrl) {
+  const previousProfileImageUrl = user.profileImageUrl || '';
+  const nextProfileImageValue = String(profileImageUrl || '').trim();
+
+  if (!nextProfileImageValue) {
+    user.profileImageUrl = '';
+    await deleteStoredProfileImage(previousProfileImageUrl);
+    return user.profileImageUrl;
+  }
+
+  if (nextProfileImageValue.startsWith('data:')) {
+    const storedProfileImageUrl = await saveProfileImage(nextProfileImageValue, user.id);
+    if (!storedProfileImageUrl) {
+      throw new Error('INVALID_PROFILE_IMAGE');
+    }
+
+    user.profileImageUrl = storedProfileImageUrl;
+    if (storedProfileImageUrl !== previousProfileImageUrl) {
+      await deleteStoredProfileImage(previousProfileImageUrl);
+    }
+    return user.profileImageUrl;
+  }
+
+  user.profileImageUrl = nextProfileImageValue;
+  return user.profileImageUrl;
 }
 
 app.get('/api/health', (_request, response) => {
@@ -167,6 +252,48 @@ app.get('/api/events', async (request, response) => {
   response.json(events);
 });
 
+app.post('/api/events/:id/registrations', async (request, response) => {
+  const body = request.body || {};
+  const attendees = Number(body.attendees);
+  const db = await readDatabase();
+  db.eventRegistrations ??= [];
+
+  const event = db.events.find((item) => item.id === request.params.id && item.published);
+  if (!event) {
+    response.status(404).json({ message: 'Event not found.' });
+    return;
+  }
+
+  if (
+    !requiredString(body, 'name', 2) ||
+    !requiredString(body, 'email', 5) ||
+    !validEmail(body.email) ||
+    !Number.isFinite(attendees) ||
+    attendees < 1
+  ) {
+    response.status(400).json({ message: 'Please complete the required event registration fields.' });
+    return;
+  }
+
+  const registration = {
+    id: `event-registration-${crypto.randomUUID()}`,
+    eventId: event.id,
+    eventTitle: event.title,
+    locale: event.locale,
+    name: body.name.trim(),
+    email: normalizedEmail(body.email),
+    phone: String(body.phone || '').trim(),
+    attendees,
+    note: String(body.note || '').trim(),
+    createdAt: new Date().toISOString()
+  };
+
+  db.eventRegistrations.push(registration);
+  await writeDatabase(db);
+
+  response.status(201).json({ id: registration.id, createdAt: registration.createdAt });
+});
+
 app.post('/api/auth/register', async (request, response) => {
   const body = request.body || {};
   const email = normalizedEmail(body.email);
@@ -188,6 +315,7 @@ app.post('/api/auth/register', async (request, response) => {
     id: `user-${crypto.randomUUID()}`,
     name: body.name.trim(),
     email,
+    profileImageUrl: '',
     passwordHash: hashPassword(body.password),
     createdAt: new Date().toISOString()
   };
@@ -253,6 +381,83 @@ app.get('/api/auth/me', async (request, response) => {
     return;
   }
 
+  response.json({ user: sanitizeUser(user) });
+});
+
+app.patch('/api/auth/profile', async (request, response) => {
+  const token = readAuthToken(request);
+  if (!token) {
+    response.status(401).json({ message: 'Authentication required.' });
+    return;
+  }
+
+  const body = request.body || {};
+  if (!requiredString(body, 'name', 2)) {
+    response.status(400).json({ message: 'Please complete the required profile fields.' });
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  const session = db.authSessions.find((item) => item.token === token);
+  const user = session ? db.users.find((item) => item.id === session.userId) : null;
+
+  if (!user) {
+    response.status(401).json({ message: 'Session not found.' });
+    return;
+  }
+
+  user.name = body.name.trim();
+  if (typeof body.profileImageUrl === 'string') {
+    try {
+      await persistUserProfileImage(user, body.profileImageUrl);
+    } catch (error) {
+      if (error instanceof Error && error.message === 'INVALID_PROFILE_IMAGE') {
+        response.status(400).json({ message: 'Please upload a valid profile image.' });
+        return;
+      }
+
+      throw error;
+    }
+  }
+
+  await writeDatabase(db);
+  response.json({ user: sanitizeUser(user) });
+});
+
+app.patch('/api/auth/profile/photo', async (request, response) => {
+  const token = readAuthToken(request);
+  if (!token) {
+    response.status(401).json({ message: 'Authentication required.' });
+    return;
+  }
+
+  const body = request.body || {};
+  if (typeof body.profileImageUrl !== 'string') {
+    response.status(400).json({ message: 'Please upload a valid profile image.' });
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  const session = db.authSessions.find((item) => item.token === token);
+  const user = session ? db.users.find((item) => item.id === session.userId) : null;
+
+  if (!user) {
+    response.status(401).json({ message: 'Session not found.' });
+    return;
+  }
+
+  try {
+    await persistUserProfileImage(user, body.profileImageUrl);
+  } catch (error) {
+    if (error instanceof Error && error.message === 'INVALID_PROFILE_IMAGE') {
+      response.status(400).json({ message: 'Please upload a valid profile image.' });
+      return;
+    }
+
+    throw error;
+  }
+
+  await writeDatabase(db);
   response.json({ user: sanitizeUser(user) });
 });
 
@@ -354,6 +559,8 @@ app.post('/api/contact', async (request, response) => {
 });
 
 const angularDist = join(__dirname, 'public', 'browser');
+
+app.use(profileImageMountPath, express.static(profileImagesDir));
 
 if (existsSync(angularDist)) {
   app.use(express.static(angularDist));

@@ -1,0 +1,23 @@
+.event-register-trigger {
+  justify-self: start;
+}
+
+.event-registration-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.event-registration-intro {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.event-registration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

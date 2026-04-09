@@ -1,0 +1,109 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.profile.title }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <p class="eyebrow">{{ dictionary.auth.profile }}</p>
+        <h1>{{ dictionary.profile.title }}</h1>
+        <p>{{ dictionary.profile.body }}</p>
+      </div>
+      <div class="hero-figure">
+        <div class="hero-orbit"></div>
+        <div class="hero-person"></div>
+        <div class="hero-dome"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    @if (user) {
+      <div class="profile-layout">
+        <form class="form-panel" (ngSubmit)="save()">
+          <div class="field-group">
+            <label for="profile-name">{{ dictionary.auth.name }}</label>
+            <input id="profile-name" name="name" [(ngModel)]="form.name" />
+          </div>
+          <div class="field-group">
+            <label for="profile-email">{{ dictionary.auth.email }}</label>
+            <input id="profile-email" [value]="user.email" readonly />
+            <p class="field-help">{{ dictionary.profile.emailReadonly }}</p>
+          </div>
+          <div class="field-group">
+            <label for="profile-photo">{{ dictionary.profile.photoUpload }}</label>
+            <input
+              #profilePhotoInput
+              id="profile-photo"
+              class="profile-file-input"
+              type="file"
+              accept="image/*"
+              [disabled]="isUploadingPhoto"
+              (click)="preparePhotoInput(profilePhotoInput)"
+              (change)="uploadPhoto($event)"
+            />
+            <label class="profile-upload-shell" for="profile-photo">
+              <span class="profile-upload-button">
+                {{ isUploadingPhoto ? dictionary.common.sending : dictionary.profile.photoUpload }}
+              </span>
+              <span class="profile-upload-name">
+                {{
+                  isUploadingPhoto
+                    ? dictionary.common.sending
+                    : selectedPhotoName || dictionary.profile.photoHelp
+                }}
+              </span>
+            </label>
+            <p class="field-help">{{ dictionary.profile.photoHelp }}</p>
+            @if (form.profileImageUrl) {
+              <button
+                class="secondary-button profile-remove-photo"
+                type="button"
+                [disabled]="isUploadingPhoto"
+                (click)="removePhoto()"
+              >
+                {{ dictionary.profile.removePhoto }}
+              </button>
+            }
+          </div>
+          <button
+            class="primary-button submit-button"
+            type="submit"
+            [disabled]="!isValid() || isSaving || isUploadingPhoto"
+          >
+            {{ isSaving || isUploadingPhoto ? dictionary.common.sending : dictionary.profile.save }}
+          </button>
+          @if (feedback) {
+            <div
+              class="form-feedback"
+              [class.is-success]="feedback.status === 'success'"
+              [class.is-error]="feedback.status === 'error'"
+            >
+              <p>{{ feedback.message }}</p>
+            </div>
+          }
+        </form>
+
+        <aside class="profile-summary">
+          <div class="profile-avatar-shell">
+            <img class="profile-avatar" [src]="profileImage()" alt="" />
+          </div>
+          <div class="profile-meta content-panel is-soft">
+            <h2>{{ dictionary.profile.photoPreview }}</h2>
+            <p><strong>{{ user.name }}</strong></p>
+            <p>{{ user.email }}</p>
+            <p>{{ dictionary.profile.memberSince }}: {{ formatJoinedDate(user.createdAt) }}</p>
+          </div>
+        </aside>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <h2>{{ dictionary.profile.signedOutTitle }}</h2>
+        <p>{{ dictionary.profile.signedOutBody }}</p>
+      </div>
+    }
+  </section>
+</div>

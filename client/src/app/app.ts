@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, inject } from '@angular/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Subscription, filter, finalize } from 'rxjs';
@@ -30,6 +30,7 @@ export class App implements OnDestroy {
   protected dictionary: Dictionary = this.i18n.dictionary;
   protected themeMode: ThemeMode = this.theme.mode;
   protected authUser: AuthUser | null = this.auth.user;
+  protected authMenuOpen = false;
   protected menuOpen = false;
   protected authModalOpen = false;
   protected authMode: AuthMode = 'login';
@@ -48,11 +49,6 @@ export class App implements OnDestroy {
   };
 
   protected readonly navTargets = [
-    {
-      key: 'accessibility',
-      path: '/accessibility',
-      label: () => this.dictionary.nav.accessibility,
-    },
     { key: 'events', path: '/events', label: () => this.dictionary.nav.events },
     { key: 'dailyCorner', path: '/daily-corner', label: () => this.dictionary.nav.dailyCorner },
     { key: 'contact', path: '/contact', label: () => this.dictionary.nav.contact },
@@ -90,6 +86,7 @@ export class App implements OnDestroy {
     this.subscriptions.add(
       this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
         this.menuOpen = false;
+        this.authMenuOpen = false;
       }),
     );
   }
@@ -110,6 +107,7 @@ export class App implements OnDestroy {
 
   protected toggleMenu() {
     this.menuOpen = !this.menuOpen;
+    this.authMenuOpen = false;
   }
 
   protected openAuthModal(mode: AuthMode) {
@@ -118,6 +116,7 @@ export class App implements OnDestroy {
     this.authPending = false;
     this.authError = '';
     this.menuOpen = false;
+    this.authMenuOpen = false;
   }
 
   protected closeAuthModal() {
@@ -137,6 +136,19 @@ export class App implements OnDestroy {
 
   protected toggleTheme() {
     this.theme.toggleTheme();
+  }
+
+  protected profileImage(user: AuthUser | null = this.authUser) {
+    return user?.profileImageUrl?.trim() || '/profile-icon.png';
+  }
+
+  protected toggleAuthMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.authMenuOpen = !this.authMenuOpen;
+  }
+
+  protected closeAuthMenu() {
+    this.authMenuOpen = false;
   }
 
   protected languageIcon() {
@@ -221,6 +233,7 @@ export class App implements OnDestroy {
   }
 
   protected logout() {
+    this.authMenuOpen = false;
     this.authPending = true;
     this.auth
       .logout()
@@ -299,5 +312,10 @@ export class App implements OnDestroy {
     }
 
     return '';
+  }
+
+  @HostListener('document:click')
+  protected onDocumentClick() {
+    this.authMenuOpen = false;
   }
 }

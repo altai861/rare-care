@@ -7,7 +7,7 @@ import { Dictionary } from '../../content';
 import { I18n } from '../../core/i18n';
 import { Locale } from '../../models';
 
-type LegalKind = 'privacy' | 'disclaimer' | 'accessibility';
+type LegalKind = 'privacy' | 'disclaimer';
 
 @Component({
   selector: 'app-legal',
@@ -45,9 +45,7 @@ export class Legal implements OnInit, OnDestroy {
   title() {
     return this.kind === 'privacy'
       ? this.dictionary.legal.privacyTitle
-      : this.kind === 'disclaimer'
-        ? this.dictionary.legal.disclaimerTitle
-        : this.dictionary.legal.accessibilityTitle;
+      : this.dictionary.legal.disclaimerTitle;
   }
 
   description() {
@@ -61,9 +59,7 @@ export class Legal implements OnInit, OnDestroy {
       return this.dictionary.common.educationalDisclaimer;
     }
 
-    return this.locale === 'mn'
-      ? 'Rare Care нь гар, гар утас, дэлгэц уншигч, тод контрастын хэрэглээг дэмжих суурь зарчмуудтайгаар бүтээгдсэн.'
-      : 'Rare Care is built with semantic structure, keyboard access, visible focus states, and room to expand accessibility support over time.';
+    return '';
   }
 
   paragraphs() {
@@ -93,14 +89,6 @@ export class Legal implements OnInit, OnDestroy {
           ];
     }
 
-    return mn
-      ? [
-          'Энэ MVP хувилбар нь ойлгомжтой гарчиг, шошготой форм, гарын тусламжтай удирдлага, харагдах фокус төлөвийг багтаана.',
-          'Өдрийн буланд аудио холбоос дэмжих суурийг бэлтгэсэн. Цаашид фонтын хэмжээ, контрастын тохиргоо, контентын уншлага нэмэх боломжтой.',
-        ]
-      : [
-          'This MVP includes structured headings, labeled forms, keyboard-friendly navigation, and visible focus states.',
-          'Daily Corner already supports optional audio links. Future iterations can add stronger contrast preferences, font controls, and richer audio support.',
-        ];
+    return [];
   }
 }

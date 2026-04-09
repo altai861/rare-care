@@ -9,9 +9,11 @@ import {
   Disease,
   DonationForm,
   EventItem,
+  EventRegistrationForm,
   Locale,
   LoginForm,
   RegisterForm,
+  UpdateProfileForm,
 } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -45,6 +47,13 @@ export class Api {
     return this.http.get<EventItem[]>('/api/events', { params: { locale } });
   }
 
+  createEventRegistration(eventId: string, form: EventRegistrationForm) {
+    return this.http.post<{ id: string; createdAt: string }>(
+      `/api/events/${eventId}/registrations`,
+      form,
+    );
+  }
+
   createDonation(form: DonationForm) {
     return this.http.post<{ id: string; status: string; createdAt: string }>(
       '/api/donations',
@@ -62,6 +71,22 @@ export class Api {
 
   login(form: LoginForm) {
     return this.http.post<AuthResponse>('/api/auth/login', form);
+  }
+
+  updateProfile(token: string, form: UpdateProfileForm) {
+    return this.http.patch<{ user: AuthUser }>('/api/auth/profile', form, {
+      headers: { 'x-auth-token': token },
+    });
+  }
+
+  updateProfilePhoto(token: string, profileImageUrl: string) {
+    return this.http.patch<{ user: AuthUser }>(
+      '/api/auth/profile/photo',
+      { profileImageUrl },
+      {
+        headers: { 'x-auth-token': token },
+      },
+    );
   }
 
   getCurrentUser(token: string) {

@@ -48,6 +48,7 @@ export const dictionaries = {
       account: 'Бүртгэл',
       login: 'Нэвтрэх',
       register: 'Бүртгүүлэх',
+      profile: 'Профайл',
       logout: 'Гарах',
       signedInAs: 'Нэвтэрсэн хэрэглэгч',
       welcomeTitle: 'Rare Care-д тавтай морил',
@@ -73,6 +74,23 @@ export const dictionaries = {
       passwordMismatch: 'Нууц үгүүд таарахгүй байна.',
       loginCta: 'Одоо нэвтрэх',
       registerCta: 'Шинэ бүртгэл',
+    },
+    profile: {
+      title: 'Профайл',
+      body: 'Өөрийн нэр, зураг, бүртгэлийн мэдээллээ энэ хэсгээс хянаарай.',
+      photoUpload: 'Профайл зураг оруулах',
+      photoHelp: 'Зурагтай файл сонгоно уу. JPG, PNG зэрэг ердийн зураг ажиллана.',
+      photoPreview: 'Зургийн харагдац',
+      removePhoto: 'Зураг арилгах',
+      photoTypeError: 'Зөвхөн зураг файл оруулна уу.',
+      photoSizeError: 'Зургийн хэмжээ хэт том байна. 4MB-аас бага файл сонгоно уу.',
+      emailReadonly: 'Имэйл хаягийг одоогоор зөвхөн харах боломжтой.',
+      memberSince: 'Элссэн огноо',
+      save: 'Профайл хадгалах',
+      success: 'Профайл амжилттай шинэчлэгдлээ.',
+      signedOutTitle: 'Профайлд нэвтрэх шаардлагатай',
+      signedOutBody:
+        'Профайлаа харах эсвэл засахын тулд дээд хэсгийн бүртгэлийн хэсгээс эхлээд нэвтэрнэ үү.',
     },
     footer: {
       tagline:
@@ -176,6 +194,13 @@ export const dictionaries = {
       organizer: 'Зохион байгуулагч',
       location: 'Байршил',
       register: 'Оролцох',
+      registrationIntro: 'Оролцох хүсэлтээ үлдээгээд баталгаажуулах мэдээллээ имэйлээр авна уу.',
+      name: 'Нэр',
+      email: 'Имэйл',
+      phone: 'Утас',
+      attendees: 'Оролцогчдын тоо',
+      note: 'Тэмдэглэл',
+      success: 'Таны бүртгэл хадгалагдлаа. Бид баталгаажуулах мэдээллийг боломжтой үед илгээнэ.',
     },
     community: {
       title: 'Олон нийт',
@@ -245,6 +270,7 @@ export const dictionaries = {
       account: 'Account',
       login: 'Login',
       register: 'Register',
+      profile: 'Profile',
       logout: 'Logout',
       signedInAs: 'Signed in as',
       welcomeTitle: 'Welcome to Rare Care',
@@ -270,6 +296,23 @@ export const dictionaries = {
       passwordMismatch: 'Passwords do not match.',
       loginCta: 'Login Now',
       registerCta: 'New Account',
+    },
+    profile: {
+      title: 'Profile',
+      body: 'Review your name, picture, and account details in one calm place.',
+      photoUpload: 'Upload profile photo',
+      photoHelp: 'Choose an image file. Common JPG and PNG files work well.',
+      photoPreview: 'Photo preview',
+      removePhoto: 'Remove photo',
+      photoTypeError: 'Please choose an image file.',
+      photoSizeError: 'That image is too large. Please choose a file under 4MB.',
+      emailReadonly: 'Your email is currently view-only.',
+      memberSince: 'Member since',
+      save: 'Save Profile',
+      success: 'Your profile was updated successfully.',
+      signedOutTitle: 'Sign in to view your profile',
+      signedOutBody:
+        'Use the account area in the header first, then return here to manage your details.',
     },
     footer: {
       tagline:
@@ -375,6 +418,15 @@ export const dictionaries = {
       organizer: 'Organizer',
       location: 'Location',
       register: 'Register',
+      registrationIntro:
+        'Leave your details and we will follow up with confirmation information by email.',
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      attendees: 'Number of attendees',
+      note: 'Note',
+      success:
+        'Your registration was saved. We will follow up with confirmation details when available.',
     },
     community: {
       title: 'Community',
