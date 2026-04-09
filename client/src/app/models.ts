@@ -78,3 +78,26 @@ export type ContactForm = {
   subject: string;
   message: string;
 };
+
+export type AuthUser = {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+};
+
+export type LoginForm = {
+  email: string;
+  password: string;
+};
+
+export type RegisterForm = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type AuthResponse = {
+  token: string;
+  user: AuthUser;
+};

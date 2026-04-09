@@ -1,7 +1,18 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-import { ContactForm, DailyCornerEntry, Disease, DonationForm, EventItem, Locale } from '../models';
+import {
+  AuthResponse,
+  AuthUser,
+  ContactForm,
+  DailyCornerEntry,
+  Disease,
+  DonationForm,
+  EventItem,
+  Locale,
+  LoginForm,
+  RegisterForm,
+} from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class Api {
@@ -43,5 +54,29 @@ export class Api {
 
   createContactMessage(form: ContactForm) {
     return this.http.post<ContactForm & { id: string; createdAt: string }>('/api/contact', form);
+  }
+
+  register(form: RegisterForm) {
+    return this.http.post<AuthResponse>('/api/auth/register', form);
+  }
+
+  login(form: LoginForm) {
+    return this.http.post<AuthResponse>('/api/auth/login', form);
+  }
+
+  getCurrentUser(token: string) {
+    return this.http.get<{ user: AuthUser }>('/api/auth/me', {
+      headers: { 'x-auth-token': token },
+    });
+  }
+
+  logout(token: string) {
+    return this.http.post<void>(
+      '/api/auth/logout',
+      {},
+      {
+        headers: { 'x-auth-token': token },
+      },
+    );
   }
 }

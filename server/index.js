@@ -30,6 +30,62 @@ function requiredString(body, field, minLength = 1) {
   return typeof body[field] === 'string' && body[field].trim().length >= minLength;
 }
 
+function normalizedEmail(value) {
+  return String(value || '').trim().toLowerCase();
+}
+
+function validEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail(value));
+}
+
+function ensureAuthCollections(db) {
+  db.users ??= [];
+  db.authSessions ??= [];
+  return db;
+}
+
+function sanitizeUser(user) {
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    createdAt: user.createdAt
+  };
+}
+
+function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
+  const derivedKey = crypto.scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${derivedKey}`;
+}
+
+function verifyPassword(password, storedHash) {
+  const [salt, originalHash] = String(storedHash || '').split(':');
+  if (!salt || !originalHash) {
+    return false;
+  }
+
+  try {
+    const derivedKey = crypto.scryptSync(password, salt, 64).toString('hex');
+    return crypto.timingSafeEqual(Buffer.from(originalHash, 'hex'), Buffer.from(derivedKey, 'hex'));
+  } catch {
+    return false;
+  }
+}
+
+function readAuthToken(request) {
+  const directToken = request.get('x-auth-token');
+  if (directToken) {
+    return directToken;
+  }
+
+  const authorization = request.get('authorization');
+  if (authorization?.startsWith('Bearer ')) {
+    return authorization.slice(7);
+  }
+
+  return '';
+}
+
 app.get('/api/health', (_request, response) => {
   response.json({ ok: true, app: 'rare-care', database: 'json-file' });
 });
@@ -109,6 +165,109 @@ app.get('/api/events', async (request, response) => {
   const events = publicOnly(db.events, locale).sort((left, right) => left.date.localeCompare(right.date));
 
   response.json(events);
+});
+
+app.post('/api/auth/register', async (request, response) => {
+  const body = request.body || {};
+  const email = normalizedEmail(body.email);
+
+  if (!requiredString(body, 'name', 2) || !validEmail(email) || !requiredString(body, 'password', 8)) {
+    response.status(400).json({ message: 'Please complete the required registration fields.' });
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  const existingUser = db.users.find((user) => user.email === email);
+
+  if (existingUser) {
+    response.status(409).json({ message: 'An account with this email already exists.' });
+    return;
+  }
+
+  const user = {
+    id: `user-${crypto.randomUUID()}`,
+    name: body.name.trim(),
+    email,
+    passwordHash: hashPassword(body.password),
+    createdAt: new Date().toISOString()
+  };
+  const session = {
+    id: `session-${crypto.randomUUID()}`,
+    userId: user.id,
+    token: crypto.randomBytes(32).toString('hex'),
+    createdAt: new Date().toISOString()
+  };
+
+  db.users.push(user);
+  db.authSessions = db.authSessions.filter((item) => item.userId !== user.id);
+  db.authSessions.push(session);
+  await writeDatabase(db);
+
+  response.status(201).json({ token: session.token, user: sanitizeUser(user) });
+});
+
+app.post('/api/auth/login', async (request, response) => {
+  const body = request.body || {};
+  const email = normalizedEmail(body.email);
+
+  if (!validEmail(email) || !requiredString(body, 'password', 8)) {
+    response.status(400).json({ message: 'Please enter a valid email and password.' });
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  const user = db.users.find((item) => item.email === email);
+
+  if (!user || !verifyPassword(body.password, user.passwordHash)) {
+    response.status(401).json({ message: 'Incorrect email or password.' });
+    return;
+  }
+
+  const session = {
+    id: `session-${crypto.randomUUID()}`,
+    userId: user.id,
+    token: crypto.randomBytes(32).toString('hex'),
+    createdAt: new Date().toISOString()
+  };
+
+  db.authSessions = db.authSessions.filter((item) => item.userId !== user.id);
+  db.authSessions.push(session);
+  await writeDatabase(db);
+
+  response.json({ token: session.token, user: sanitizeUser(user) });
+});
+
+app.get('/api/auth/me', async (request, response) => {
+  const token = readAuthToken(request);
+  if (!token) {
+    response.status(401).json({ message: 'Authentication required.' });
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  const session = db.authSessions.find((item) => item.token === token);
+  const user = session ? db.users.find((item) => item.id === session.userId) : null;
+
+  if (!user) {
+    response.status(401).json({ message: 'Session not found.' });
+    return;
+  }
+
+  response.json({ user: sanitizeUser(user) });
+});
+
+app.post('/api/auth/logout', async (request, response) => {
+  const token = readAuthToken(request);
+  if (!token) {
+    response.status(204).end();
+    return;
+  }
+
+  const db = ensureAuthCollections(await readDatabase());
+  db.authSessions = db.authSessions.filter((item) => item.token !== token);
+  await writeDatabase(db);
+
+  response.status(204).end();
 });
 
 app.post('/api/donations', async (request, response) => {

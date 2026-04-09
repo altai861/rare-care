@@ -615,5 +615,14 @@
   ],
   "donationSubmissions": [],
   "contactMessages": [],
-  "users": []
+  "users": [
+    {
+      "id": "user-f9bb2c74-1793-4136-b852-ed4fa7cdfc85",
+      "name": "altai",
+      "email": "altai@gmail.com",
+      "passwordHash": "f64ca14704f5006ffee1b3f5593e7eb1:ec7a90e6e5f2e94069665b2d0291f596f2c242834b8c1d06dcc7f625135c66e426b74b479d21d2c8fe1fda42284ebce2bed5b77c23e972b9a1c2760780adc94e",
+      "createdAt": "2026-04-08T03:07:04.691Z"
+    }
+  ],
+  "authSessions": []
 }
