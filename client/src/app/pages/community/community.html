@@ -5,46 +5,237 @@
       ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.community }}</span>
     </nav>
   </div>
+
   <section class="page-hero">
-    <div class="container page-hero-inner">
-      <div class="page-hero-copy">
+    <div class="container page-hero-inner community-hero">
+      <div class="page-hero-copy community-hero-copy">
         <h1>{{ dictionary.community.title }}</h1>
         <p>{{ dictionary.community.body }}</p>
+        <div class="community-actions">
+          <a class="primary-button" href="#community-forum">{{ dictionary.community.primaryAction }}</a>
+          <a class="secondary-button" href="#community-groups">{{
+            dictionary.community.secondaryAction
+          }}</a>
+        </div>
+      </div>
+      <aside class="community-core-card">
+        <span>{{ dictionary.community.coreIdea }}</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-heading">
+      <h2>{{ dictionary.community.supportTitle }}</h2>
+    </div>
+    <div class="community-support-grid">
+      @for (item of dictionary.community.supportItems; track item.title) {
+        <article class="community-support-card">
+          <div class="community-icon" aria-hidden="true">{{ item.icon }}</div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="community-forum" class="container section">
+    <div class="community-forum-panel">
+      <div class="community-forum-head">
+        <div>
+          <h2>{{ dictionary.community.forumTitle }}</h2>
+          <p>{{ dictionary.community.forumBody }}</p>
+        </div>
+        <a class="primary-button" href="mailto:hello@rarecare.local">{{
+          dictionary.community.primaryAction
+        }}</a>
+      </div>
+      <div class="community-search-row" role="search" aria-label="Community question search preview">
+        <label>
+          <span class="field-label">{{ dictionary.common.search }}</span>
+          <input [placeholder]="dictionary.community.searchPlaceholder" />
+        </label>
+        <label>
+          <span class="field-label">{{ dictionary.nav.diseaseInformation }}</span>
+          <select>
+            <option>{{ dictionary.community.allDiseases }}</option>
+          </select>
+        </label>
+        <label>
+          <span class="field-label">{{ dictionary.community.allTopics }}</span>
+          <select>
+            <option>{{ dictionary.community.allTopics }}</option>
+          </select>
+        </label>
       </div>
     </div>
   </section>
+
+  <section id="community-groups" class="container section">
+    <div class="section-heading">
+      <h2>{{ dictionary.community.groupTitle }}</h2>
+      <p>{{ dictionary.community.groupBody }}</p>
+    </div>
+    <div class="community-group-grid">
+      @for (group of dictionary.community.groups; track group.title) {
+        <article class="community-group-card">
+          <div class="community-card-top">
+            <span class="community-role-pill">{{ group.role }}</span>
+            <span class="community-arrow" aria-hidden="true">→</span>
+          </div>
+          <h3>{{ group.title }}</h3>
+          <p>{{ group.body }}</p>
+          <div class="community-group-meta">
+            <span aria-hidden="true">♢</span>
+            <span>{{ group.members }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
   <section class="container section">
-    <div class="three-up-grid">
-      <article class="content-panel">
-        <h2>{{ dictionary.community.welcome }}</h2>
-        <p>
-          {{
-            locale === 'mn'
-              ? 'Rare Care-ийн олон нийтийн хэсэг нь гэр бүлүүд хоорондоо холбогдох ирээдүйн орон зайг тайван, аюулгүй байдлаар бэлтгэж байна.'
-              : 'The Rare Care community area is a simple first step toward future connection spaces for patients, caregivers, and families.'
-          }}
-        </p>
-      </article>
-      <article class="content-panel is-soft">
-        <h2>{{ dictionary.community.safety }}</h2>
-        <p>
-          {{
-            locale === 'mn'
-              ? 'Нууцлал, зохистой хяналт, аюулгүй дүрэмгүйгээр нээлттэй хэлэлцүүлэг эхлүүлэхгүй. Хувийн мэдээллийг хамгийн бага хэмжээнд цуглуулах зарчмыг баримтална.'
-              : 'We will not open broader discussions without moderation, privacy controls, and clearer safety policies. The MVP keeps data collection minimal.'
-          }}
-        </p>
-      </article>
-      <article class="content-panel">
-        <h2>{{ dictionary.community.future }}</h2>
-        <p>
-          {{
-            locale === 'mn'
-              ? 'Дараагийн шатанд өвчний бүлгүүд, нэрээ нууцалсан нийтлэл, профайл болон оролцооны тохиргоо нэмэгдэх боломжтой.'
-              : 'Future phases can add disease-based groups, anonymous posting, profiles, and stronger moderation workflows.'
-          }}
-        </p>
-      </article>
+    <div class="community-story-layout">
+      <div class="community-story-head">
+        <div>
+          <h2>{{ dictionary.community.storyTitle }}</h2>
+          <p>{{ dictionary.community.storyBody }}</p>
+        </div>
+        <button class="primary-button community-share-button" type="button" (click)="openStoryDialog()">
+          <span aria-hidden="true">♡</span>
+          {{ dictionary.community.shareExperience }}
+        </button>
+      </div>
+      @if (storyFeedback) {
+        <p class="community-story-feedback">{{ storyFeedback }}</p>
+      }
+      <div class="community-story-grid">
+        @for (story of visibleStories; track story.id) {
+          <article class="community-story-card">
+            <div class="community-avatar" aria-hidden="true">{{ story.name.slice(0, 1) }}</div>
+            <div>
+              <h3>{{ story.name }}</h3>
+              <span>{{ story.role }}</span>
+            </div>
+            <p>{{ story.body }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  @if (storyDialogOpen) {
+    <div class="community-modal-backdrop" (click)="closeStoryDialog()">
+      <section
+        class="community-story-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="share-story-title"
+        (click)="$event.stopPropagation()"
+      >
+        <button
+          class="community-modal-close"
+          type="button"
+          [attr.aria-label]="dictionary.auth.close"
+          (click)="closeStoryDialog()"
+        >
+          x
+        </button>
+        <div class="community-modal-copy">
+          <h2 id="share-story-title">{{ dictionary.community.shareExperienceTitle }}</h2>
+          <p>{{ dictionary.community.shareExperienceIntro }}</p>
+        </div>
+        <form class="community-share-form" (ngSubmit)="submitStory()" novalidate>
+          <div class="community-form-grid">
+            <div class="community-form-main">
+              <label class="field-group" for="story-name">
+                <span>{{ dictionary.community.storyNameLabel }}</span>
+                <input
+                  id="story-name"
+                  name="storyName"
+                  [disabled]="storyForm.anonymous"
+                  [placeholder]="dictionary.community.storyNamePlaceholder"
+                  [(ngModel)]="storyForm.name"
+                />
+              </label>
+
+              <div class="community-two-fields">
+                <label class="field-group" for="story-role">
+                  <span>{{ dictionary.community.storyRoleLabel }}</span>
+                  <select id="story-role" name="storyRole" [(ngModel)]="storyForm.role">
+                    @for (role of storyRoleOptions; track role) {
+                      <option [value]="role">{{ role }}</option>
+                    }
+                  </select>
+                </label>
+                <label class="field-group" for="story-disease">
+                  <span>{{ dictionary.community.storyDiseaseLabel }}</span>
+                  <input
+                    id="story-disease"
+                    name="storyDisease"
+                    [placeholder]="dictionary.community.storyDiseasePlaceholder"
+                    [(ngModel)]="storyForm.disease"
+                  />
+                </label>
+              </div>
+
+              <label class="field-group" for="story-body">
+                <span>{{ dictionary.community.storyMessageLabel }}</span>
+                <textarea
+                  id="story-body"
+                  name="storyBody"
+                  rows="6"
+                  [placeholder]="dictionary.community.storyMessagePlaceholder"
+                  [(ngModel)]="storyForm.body"
+                ></textarea>
+              </label>
+            </div>
+
+            <aside class="community-story-guide">
+              <h3>{{ dictionary.community.storyGuideTitle }}</h3>
+              <ul>
+                @for (item of dictionary.community.storyGuideItems; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+            </aside>
+          </div>
+
+          <label class="community-check-row">
+            <input name="storyAnonymous" type="checkbox" [(ngModel)]="storyForm.anonymous" />
+            <span>{{ dictionary.community.storyAnonymousLabel }}</span>
+          </label>
+          <label class="community-check-row is-consent">
+            <input name="storyConsent" type="checkbox" [(ngModel)]="storyForm.consent" />
+            <span>{{ dictionary.community.storyConsentLabel }}</span>
+          </label>
+          @if (storyFeedback) {
+            <p class="community-story-form-feedback">{{ storyFeedback }}</p>
+          }
+          <div class="community-modal-actions">
+            <button class="secondary-button" type="button" (click)="closeStoryDialog()">
+              {{ dictionary.community.storyCancel }}
+            </button>
+            <button class="primary-button" type="submit" [disabled]="!isStoryValid()">
+              {{ dictionary.community.storySubmit }}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  }
+
+  <section class="container section">
+    <div class="community-promise">
+      <div>
+        <h2>{{ dictionary.community.promiseTitle }}</h2>
+        <p>{{ dictionary.community.coreIdea }}</p>
+      </div>
+      <ul>
+        @for (item of dictionary.community.promiseItems; track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
     </div>
   </section>
 </div>

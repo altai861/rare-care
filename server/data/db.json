@@ -455,6 +455,7 @@
       "reminderTitle": "Өнөөдрийн сануулга",
       "reminderBody": "Амгалан байх нь зүгээр суух гэсэн үг биш. Энэ нь өөрийнхөө хэмнэлийг хүндэтгэх тухай юм.",
       "image": "calm",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "mn",
       "published": true
     },
@@ -467,7 +468,7 @@
       "reminderTitle": "Өнөөдрийн сануулга",
       "reminderBody": "Шинж тэмдэг бүрийг даван туулах ёстой дайсан гэж харахын оронд, юу хэрэгтэй байгааг ойлгуулах дохио гэж харж болно.",
       "image": "listen",
-      "audioUrl": "/audio/daily-corner-placeholder.mp3",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "mn",
       "published": true
     },
@@ -480,6 +481,7 @@
       "reminderTitle": "Өнөөдрийн сануулга",
       "reminderBody": "Өнөөдөр ганц жижиг амралтын цэг гарга. Богино алхалт, ус уух, эсвэл хэн нэгэнд мессеж бичих байж болно.",
       "image": "balance",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "mn",
       "published": true
     },
@@ -492,6 +494,7 @@
       "reminderTitle": "Today's reminder",
       "reminderBody": "Peace does not mean doing nothing. It can mean respecting your current pace.",
       "image": "calm",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "en",
       "published": true
     },
@@ -504,7 +507,7 @@
       "reminderTitle": "Today's reminder",
       "reminderBody": "You do not have to fight every sensation. Some are cues to slow down and care differently.",
       "image": "listen",
-      "audioUrl": "/audio/daily-corner-placeholder.mp3",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "en",
       "published": true
     },
@@ -517,6 +520,7 @@
       "reminderTitle": "Today's reminder",
       "reminderBody": "Make room for one small pause today. A glass of water, a short walk, or a message to someone safe is enough.",
       "image": "balance",
+      "audioUrl": "/audio/daily-corner-placeholder.wav",
       "locale": "en",
       "published": true
     }
@@ -663,10 +667,10 @@
   ],
   "authSessions": [
     {
-      "id": "session-5b461458-3987-41ca-86b3-1e602c4a1a74",
+      "id": "session-6fc940d5-b105-4514-a0e3-1fbbf0f56290",
       "userId": "user-4285dd9e-ff7b-4dac-85c2-ade39caf34bd",
-      "token": "6cf3d2d79f6520d6919e4a0e83e0b2a9a83fbec3300a04b9901ee036b39c912f",
-      "createdAt": "2026-04-16T06:25:00.185Z"
+      "token": "6e1fd8bc71eb6158a75a3e442f19b4f227e30750cf962c63330dd4f9b483ef6c",
+      "createdAt": "2026-04-20T06:58:03.329Z"
     }
   ]
 }

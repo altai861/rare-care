@@ -20,6 +20,7 @@ export class Donation implements OnInit, OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly i18n = inject(I18n);
   private readonly subscriptions = new Subscription();
+  readonly heroImageSrc = '/donation/donation-support-hero.png';
 
   locale: Locale = this.i18n.locale;
   dictionary: Dictionary = this.i18n.dictionary;

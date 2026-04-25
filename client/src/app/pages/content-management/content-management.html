@@ -236,7 +236,7 @@
           </button>
         </div>
 
-        <form class="form-panel admin-modal-form" (ngSubmit)="saveEvent()">
+        <form class="form-panel admin-modal-form" (ngSubmit)="saveEvent()" novalidate>
           <div class="admin-form-section">
             <div class="section-heading">
               <h2>{{ dictionary.admin.publishingSection }}</h2>
@@ -324,7 +324,13 @@
               </div>
               <div class="field-group">
                 <label for="event-link">{{ dictionary.admin.eventLinkLabel }}</label>
-                <input id="event-link" name="eventLink" type="url" [(ngModel)]="eventForm.link" />
+                <input
+                  id="event-link"
+                  name="eventLink"
+                  type="text"
+                  [(ngModel)]="eventForm.link"
+                  placeholder="https://example.com"
+                />
               </div>
               <div class="field-group">
                 <label for="event-tone">{{ dictionary.admin.visualToneLabel }}</label>

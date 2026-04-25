@@ -5,11 +5,23 @@
       ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.donate }}</span>
     </nav>
   </div>
-  <section class="page-hero">
-    <div class="container page-hero-inner">
-      <div class="page-hero-copy">
-        <h1>{{ dictionary.donation.title }}</h1>
-        <p>{{ dictionary.donation.intro }}</p>
+  <section class="container section donation-impact-section">
+    <div class="donation-impact-panel">
+      <div class="donation-impact-intro">
+        <p class="donation-impact-kicker">{{ dictionary.home.donationImpactTitle }}</p>
+        <h2>{{ dictionary.home.donationHopeTitle }}</h2>
+        <p>{{ dictionary.home.donationTrustBody }}</p>
+      </div>
+      <div class="donation-impact-list">
+        @for (item of dictionary.home.donationImpactCards; track item.title) {
+          <article class="donation-impact-item">
+            <span aria-hidden="true">{{ item.icon }}</span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </div>
+          </article>
+        }
       </div>
     </div>
   </section>
@@ -174,7 +186,14 @@
         </section>
       </form>
       <aside class="form-sidebar">
-        <div class="sidebar-illustration" aria-hidden="true"><div class="hero-person"></div></div>
+        <div class="sidebar-illustration donation-sidebar-illustration">
+          <img
+            class="donation-sidebar-image"
+            [src]="heroImageSrc"
+            alt="Hands supporting a heart symbol for donation and community care"
+            decoding="async"
+          />
+        </div>
         <div class="sidebar-copy">
           <h2>{{ dictionary.donation.title }}</h2>
           <p>{{ dictionary.donation.intro }}</p>

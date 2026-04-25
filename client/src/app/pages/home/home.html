@@ -86,6 +86,41 @@
   </section>
 
   <section class="container section">
+    <div class="donation-impact">
+      <div class="section-heading donation-impact-heading">
+        <h2>{{ dictionary.home.donationImpactTitle }}</h2>
+      </div>
+      <div class="donation-impact-strip">
+        @for (item of dictionary.home.donationImpactCards; track item.title) {
+          <article class="donation-impact-card">
+            <div class="donation-impact-icon" aria-hidden="true">{{ item.icon }}</div>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </div>
+          </article>
+        }
+      </div>
+      <div class="donation-impact-bottom">
+        <article class="donation-trust-card">
+          <div class="donation-impact-icon is-shield" aria-hidden="true">✓</div>
+          <div>
+            <h3>{{ dictionary.home.donationTrustTitle }}</h3>
+            <p>{{ dictionary.home.donationTrustBody }}</p>
+          </div>
+        </article>
+        <article class="donation-hope-card">
+          <div class="donation-hope-symbol" aria-hidden="true">♥</div>
+          <div>
+            <h3>{{ dictionary.home.donationHopeTitle }}</h3>
+            <p>{{ dictionary.home.donationHopeBody }}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section donation-quote-section">
     <div class="donation-callout">
       <p>{{ dictionary.home.donationQuote }}</p>
       <a class="primary-button" [routerLink]="routeTo('/donation')">{{

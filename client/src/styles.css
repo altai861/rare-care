@@ -57,13 +57,13 @@
 :root.dark-theme {
   color-scheme: dark;
   --bg: #101b22;
-  --surface: #18262f;
-  --surface-soft: #213845;
-  --surface-deep: #79b8ca;
+  --surface: #1d2c35;
+  --surface-soft: #27404c;
+  --surface-deep: #9fd8e6;
   --surface-darker: #0b151b;
-  --ink: #edf5f7;
-  --ink-soft: #b8cbd2;
-  --line: #35505d;
+  --ink: #f4fbfd;
+  --ink-soft: #d0e0e6;
+  --line: #42606d;
   --accent: #edc777;
   --accent-deep: #cfa257;
   --focus: #8ec5d0;
@@ -77,11 +77,11 @@
   --header-search-bg: rgba(137, 183, 199, 0.12);
   --header-search-placeholder: rgba(237, 247, 250, 0.68);
   --mobile-panel-bg: #10232d;
-  --panel-bg: rgba(23, 38, 47, 0.94);
-  --panel-bg-strong: rgba(26, 44, 55, 0.96);
-  --panel-soft-bg: rgba(29, 51, 62, 0.92);
-  --panel-soft-gradient: linear-gradient(180deg, rgba(29, 51, 62, 0.96), rgba(16, 27, 34, 0.96));
-  --panel-warm-gradient: linear-gradient(180deg, rgba(40, 55, 61, 0.96), rgba(18, 28, 35, 0.96));
+  --panel-bg: rgba(28, 44, 54, 0.96);
+  --panel-bg-strong: rgba(34, 52, 63, 0.98);
+  --panel-soft-bg: rgba(35, 57, 69, 0.94);
+  --panel-soft-gradient: linear-gradient(180deg, rgba(37, 59, 71, 0.97), rgba(20, 31, 39, 0.97));
+  --panel-warm-gradient: linear-gradient(180deg, rgba(45, 61, 68, 0.97), rgba(22, 33, 40, 0.97));
   --hero-stage-gradient:
     linear-gradient(160deg, rgba(27, 55, 69, 0.95), rgba(49, 63, 48, 0.82)),
     linear-gradient(120deg, #15252e, #0f1b21);
@@ -1206,13 +1206,30 @@ button {
 }
 
 .daily-illustration {
+  border: 1px solid rgba(145, 184, 208, 0.2);
+  background: linear-gradient(180deg, rgba(13, 121, 200, 0.25), rgba(13, 95, 166, 0.88));
+  isolation: isolate;
+}
+
+.daily-illustration::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 26%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(84, 139, 208, 0.1));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.daily-illustration.is-placeholder {
   background:
     radial-gradient(circle at 50% 18%, #ffd8bf 0 10%, transparent 11%),
     radial-gradient(circle at 50% 11%, #2f3349 0 14%, transparent 15%),
     linear-gradient(180deg, rgba(13, 121, 200, 0.28), rgba(13, 95, 166, 0.88));
 }
 
-.daily-illustration::before {
+.daily-illustration.is-placeholder::before {
   content: '';
   position: absolute;
   inset: auto 24% 12% 24%;
@@ -1228,10 +1245,29 @@ button {
   inset: auto 29% 10% 29%;
   height: 46%;
   border-radius: 3rem 3rem 1rem 1rem;
+  z-index: 1;
   background:
     radial-gradient(circle at 50% 5%, #2f3349 0 13%, transparent 14%),
     radial-gradient(circle at 50% 18%, #ffd8bf 0 15%, transparent 16%),
     linear-gradient(180deg, #0b5fa6, #0f7bcb);
+}
+
+.daily-illustration-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 82% center;
+  transform: scale(1.02);
+}
+
+.daily-illustration.tone-listen.has-artwork .daily-illustration-image {
+  object-position: 78% center;
+}
+
+.daily-illustration.tone-balance.has-artwork .daily-illustration-image {
+  object-position: 84% center;
 }
 
 .tone-listen {
@@ -1885,4 +1921,140 @@ main {
 
 :root.dark-theme .field-error {
   color: #ffb8b8;
+}
+
+:root.dark-theme .community-core-card,
+:root.dark-theme .community-support-card,
+:root.dark-theme .community-group-card,
+:root.dark-theme .community-story-card,
+:root.dark-theme .community-forum-panel,
+:root.dark-theme .community-promise,
+:root.dark-theme .donation-impact-strip,
+:root.dark-theme .donation-trust-card,
+:root.dark-theme .donation-impact-panel,
+:root.dark-theme .donation-impact-item,
+:root.dark-theme .donation-sidebar-illustration,
+:root.dark-theme .daily-corner-goal-copy,
+:root.dark-theme .daily-list .daily-copy {
+  border-color: rgba(121, 184, 202, 0.18);
+  background: var(--panel-bg);
+}
+
+:root.dark-theme .community-core-card,
+:root.dark-theme .community-support-card h3,
+:root.dark-theme .community-group-card h3,
+:root.dark-theme .community-story-card h3,
+:root.dark-theme .community-forum-panel h2,
+:root.dark-theme .community-promise h2,
+:root.dark-theme .donation-impact h3,
+:root.dark-theme .donation-hope-card,
+:root.dark-theme .donation-impact-intro h2,
+:root.dark-theme .donation-impact-item h3,
+:root.dark-theme .daily-corner-goal-copy h1,
+:root.dark-theme .daily-list .daily-copy h2 {
+  color: var(--ink);
+}
+
+:root.dark-theme .daily-corner-description,
+:root.dark-theme .daily-corner-accessibility,
+:root.dark-theme .daily-list .daily-copy > p,
+:root.dark-theme .reminder-box p,
+:root.dark-theme .daily-audio-label,
+:root.dark-theme .donation-impact-intro p,
+:root.dark-theme .community-story-feedback,
+:root.dark-theme .community-story-form-feedback {
+  color: var(--ink-soft);
+}
+
+:root.dark-theme .daily-corner-goal-copy .eyebrow,
+:root.dark-theme .daily-date,
+:root.dark-theme .community-story-card span,
+:root.dark-theme .donation-impact-kicker {
+  color: var(--ink);
+  background: rgba(121, 184, 202, 0.16);
+}
+
+:root.dark-theme .eyebrow,
+:root.dark-theme .about-badge,
+:root.dark-theme .pill,
+:root.dark-theme .preview-meta,
+:root.dark-theme .help-icon,
+:root.dark-theme .help-card a,
+:root.dark-theme .disease-card a,
+:root.dark-theme .preview-card a,
+:root.dark-theme .event-content a,
+:root.dark-theme .audio-link,
+:root.dark-theme .symptoms-table th,
+:root.dark-theme .profile-image-remove,
+:root.dark-theme .user-summary.is-selected,
+:root.dark-theme .user-role-badge.is-admin,
+:root.dark-theme .event-meta dt,
+:root.dark-theme .disease-chip {
+  color: var(--surface-deep);
+}
+
+:root.dark-theme .daily-list .daily-copy blockquote,
+:root.dark-theme .community-story-guide li::before,
+:root.dark-theme .community-promise li::before {
+  color: var(--surface-deep);
+}
+
+:root.dark-theme .daily-corner-accessibility,
+:root.dark-theme .daily-audio-label,
+:root.dark-theme .donation-impact-icon,
+:root.dark-theme .donation-hope-symbol,
+:root.dark-theme .community-icon,
+:root.dark-theme .community-story-feedback,
+:root.dark-theme .community-story-guide li::before,
+:root.dark-theme .community-promise li::before {
+  color: #b8ebf5;
+}
+
+:root.dark-theme .daily-list .daily-copy blockquote {
+  color: #c3edff;
+}
+
+:root.dark-theme app-community .community-core-card,
+:root.dark-theme app-community .community-support-card,
+:root.dark-theme app-community .community-group-card,
+:root.dark-theme app-community .community-story-card,
+:root.dark-theme app-community .community-forum-panel,
+:root.dark-theme app-community .community-promise,
+:root.dark-theme app-community .community-story-modal {
+  background: var(--panel-bg) !important;
+  border-color: rgba(121, 184, 202, 0.18) !important;
+}
+
+:root.dark-theme app-community .community-core-card,
+:root.dark-theme app-community .community-support-card h3,
+:root.dark-theme app-community .community-group-card h3,
+:root.dark-theme app-community .community-story-card h3,
+:root.dark-theme app-community .community-forum-panel h2,
+:root.dark-theme app-community .community-promise h2,
+:root.dark-theme app-community .community-modal-copy h2,
+:root.dark-theme app-community .community-story-guide h3 {
+  color: var(--ink) !important;
+}
+
+:root.dark-theme app-community .community-icon,
+:root.dark-theme app-community .community-story-feedback,
+:root.dark-theme app-community .community-story-guide li::before,
+:root.dark-theme app-community .community-promise li::before {
+  color: #b8ebf5 !important;
+}
+
+:root.dark-theme app-community .community-story-feedback,
+:root.dark-theme app-community .community-check-row.is-consent,
+:root.dark-theme app-community .community-story-guide {
+  background: rgba(121, 184, 202, 0.12) !important;
+}
+
+:root.dark-theme .donation-hope-card,
+:root.dark-theme .donation-sidebar-illustration,
+:root.dark-theme .daily-corner-hero-figure,
+:root.dark-theme .daily-illustration,
+:root.dark-theme .community-core-card,
+:root.dark-theme .community-forum-panel,
+:root.dark-theme .community-promise {
+  background: var(--panel-soft-gradient);
 }

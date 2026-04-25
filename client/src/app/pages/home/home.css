@@ -8,8 +8,180 @@
   object-position: center;
 }
 
+.donation-impact {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.donation-impact-heading {
+  text-align: center;
+}
+
+.donation-impact-heading h2 {
+  display: inline-grid;
+  gap: 0.5rem;
+  justify-items: center;
+}
+
+.donation-impact-heading h2::after {
+  content: '';
+  width: 3.6rem;
+  height: 0.18rem;
+  border-radius: 999px;
+  background: var(--surface-deep);
+}
+
+.donation-impact-strip,
+.donation-impact-bottom {
+  display: grid;
+  gap: 1rem;
+}
+
+.donation-impact-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 1.2rem;
+  border-radius: 26px;
+  background: rgba(251, 254, 255, 0.86);
+  box-shadow: var(--shadow);
+}
+
+.donation-impact-card,
+.donation-trust-card,
+.donation-hope-card {
+  display: grid;
+  align-items: start;
+  gap: 0.95rem;
+}
+
+.donation-impact-card {
+  grid-template-columns: auto 1fr;
+  padding-right: 1rem;
+  border-right: 1px solid rgba(60, 124, 149, 0.16);
+}
+
+.donation-impact-card:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.donation-impact-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 999px;
+  color: #2c91a6;
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(180deg, rgba(121, 184, 202, 0.18), rgba(121, 184, 202, 0.08));
+}
+
+.donation-impact-icon.is-shield {
+  color: #f8fbfc;
+  background: linear-gradient(180deg, #54aec0, #2f8da2);
+}
+
+.donation-impact h3,
+.donation-impact p {
+  margin: 0;
+}
+
+.donation-impact h3 {
+  color: #17314a;
+  font-size: 1.08rem;
+}
+
+.donation-impact p {
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.donation-impact-bottom {
+  grid-template-columns: 0.72fr 1fr;
+}
+
+.donation-trust-card,
+.donation-hope-card {
+  grid-template-columns: auto 1fr;
+  padding: 1.8rem;
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+}
+
+.donation-trust-card {
+  background: rgba(251, 254, 255, 0.9);
+}
+
+.donation-hope-card {
+  position: relative;
+  overflow: hidden;
+  color: #17314a;
+  background:
+    radial-gradient(circle at 88% 35%, rgba(44, 145, 166, 0.28), transparent 12%),
+    linear-gradient(135deg, rgba(225, 241, 247, 0.98), rgba(246, 251, 252, 0.94));
+}
+
+.donation-hope-symbol {
+  display: inline-grid;
+  place-items: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  color: #2c91a6;
+  font-size: 2rem;
+}
+
+.donation-hope-card h3 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.donation-quote-section {
+  padding-top: 0.5rem;
+}
+
 @media (max-width: 720px) {
   .hero-stage-home {
     aspect-ratio: 16 / 9;
   }
+
+  .donation-impact-strip,
+  .donation-impact-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .donation-impact-card {
+    padding-right: 0;
+    padding-bottom: 1rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(60, 124, 149, 0.16);
+  }
+
+  .donation-impact-card:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .donation-trust-card,
+  .donation-hope-card {
+    padding: 1.35rem;
+  }
+}
+
+:host-context(.dark-theme) .donation-impact-strip,
+:host-context(.dark-theme) .donation-trust-card {
+  background: var(--panel-bg);
+  border-color: rgba(121, 184, 202, 0.18);
+}
+
+:host-context(.dark-theme) .donation-hope-card {
+  color: var(--ink);
+  background: var(--panel-soft-gradient);
+}
+
+:host-context(.dark-theme) .donation-impact-icon,
+:host-context(.dark-theme) .donation-hope-symbol {
+  color: #b8ebf5;
+}
+
+:host-context(.dark-theme) .donation-impact h3 {
+  color: var(--ink);
 }

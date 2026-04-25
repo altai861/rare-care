@@ -328,7 +328,16 @@ export class ContentManagement implements OnInit, OnDestroy {
   }
 
   saveEvent() {
-    if (!this.isAdmin() || !this.isEventValid()) {
+    if (!this.isAdmin()) {
+      return;
+    }
+
+    if (!this.isEventValid()) {
+      this.modalFeedback = {
+        status: 'error',
+        message: 'Please complete the required event fields.',
+      };
+      this.syncView();
       return;
     }
 
@@ -345,7 +354,7 @@ export class ContentManagement implements OnInit, OnDestroy {
       organizer: this.eventForm.organizer?.trim() || '',
       location: this.eventForm.location?.trim() || '',
       image: this.eventForm.image?.trim() || '',
-      link: this.eventForm.link?.trim() || '',
+      link: this.normalizeOptionalUrl(this.eventForm.link),
       published: this.eventForm.published,
     };
 
@@ -778,6 +787,23 @@ export class ContentManagement implements OnInit, OnDestroy {
 
   private todayIsoDate() {
     return new Date().toISOString().slice(0, 10);
+  }
+
+  private normalizeOptionalUrl(value: string | undefined) {
+    const trimmed = String(value || '').trim();
+    if (!trimmed) {
+      return '';
+    }
+
+    if (/^(https?:\/\/|mailto:|tel:)/i.test(trimmed)) {
+      return trimmed;
+    }
+
+    if (!/\s/.test(trimmed) && trimmed.includes('.')) {
+      return `https://${trimmed}`;
+    }
+
+    return trimmed;
   }
 
   private resolveKind(value: unknown): ContentKind {

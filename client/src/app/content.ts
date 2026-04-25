@@ -139,6 +139,34 @@ export const dictionaries = {
           body: 'Сэтгэл зүйн дэмжлэг, богинохон амьсгаа авах орон зай, урам өгөх агуулга.',
         },
       ],
+      donationImpactTitle: 'Таны хандив хэрхэн тусалдаг вэ?',
+      donationImpactCards: [
+        {
+          icon: '♥',
+          title: 'Өвчтөнд дэмжлэг',
+          body: 'Эмчилгээ, эмнэлгийн хэрэгцээнд зориулсан санхүүгийн тусламжийг дэмжинэ.',
+        },
+        {
+          icon: '📖',
+          title: 'Мэдээллийн хүртээмж',
+          body: 'Монгол хэл дээр найдвартай ховор өвчний мэдээлэл бэлтгэж, орчуулна.',
+        },
+        {
+          icon: '▣',
+          title: 'Платформын хөгжил',
+          body: 'Ховор өвчний олон нийтэд илүү сайн үйлчлэх платформыг сайжруулна.',
+        },
+        {
+          icon: '●',
+          title: 'Арга хэмжээ ба олон нийт',
+          body: 'Мэдлэг түгээх аян, уулзалт, олон нийтийн арга хэмжээг дэмжинэ.',
+        },
+      ],
+      donationTrustTitle: 'Ил тод байдал ба итгэл',
+      donationTrustBody:
+        'Бид бүх хандивыг хариуцлагатай, ил тод ашиглахыг эрмэлздэг. Хандив бүр утга учиртай нөлөө авчирна.',
+      donationHopeTitle: 'Хандив бүр найдвар, хүч, дэмжлэг авчирдаг.',
+      donationHopeBody: 'Өөрчлөлтийн нэг хэсэг болж байгаад баярлалаа.',
       donationQuote: '“Бид олсон зүйлээрээ амьдардаг, харин өгсөн зүйлээрээ амьдралыг бүтээдэг.”',
     },
     diseases: {
@@ -210,12 +238,15 @@ export const dictionaries = {
     },
     dailyCorner: {
       title: 'Өдрийн булан',
-      body: 'Багахан амсхийлт, сэтгэлзүйн дэмжлэг, өдөр тутмын зөөлөн сануулгыг эндээс аваарай.',
+      body:
+        'Өдрийн булан нь өдөр бүр таны сэтгэл зүйн сайн сайхныг дэмжих богино атлаа утга учиртай санааг хүргэнэ. Хэрэгтэй мөч бүрд энгийн эргэцүүлэл, зоригжуулалт, тайвшрах нэгэн агшныг санал болгоно.',
+      accessibilityNote:
+        'Өдрийн булан нь мөн нэмэлт аудио сонголтоор хүртээмжийг дэмждэг бөгөөд ингэснээр хэрэглэгчид текст уншихын оронд сонсох боломжтой. Энэ нь ядарсан, нүд чилсэн, сэтгэлээр ачаалсан, эсвэл аудио хэлбэрээр хүлээж авахад илүү тухтай хүмүүст тусална.',
     },
     donation: {
       title: 'Хандив',
       intro:
-        'Таны хандив нь Rare Care-ийн мэдээлэл түгээх, гэр бүлүүдийг холбох, тусламжийн замуудыг илүү ойртуулах ажилд зарцуулагдана.',
+        'Rare Care дахь хандивууд нь тусгай мэргэжлийн тусламж авахад санхүүгийн хүндрэлтэй тулгарч буй ховор өвчтэй хүмүүст дэмжлэг үзүүлэхэд ашиглагдана. Энэхүү хувь нэмэр нь найдвартай мэдээллийн хүртээмжийг сайжруулах, олон нийтийн дэмжлэгийг бэхжүүлэх, мөн Монгол даяарх өвчтөнүүдийг холбож, чадавхжуулах платформыг тогтвортой авч явахад тусалдаг.',
       donationType: 'Хандивын төрөл',
       oneTime: 'Нэг удаа',
       monthly: 'Сар бүр',
@@ -266,10 +297,116 @@ export const dictionaries = {
     },
     community: {
       title: 'Олон нийт',
-      body: 'MVP хувилбарт олон нийтийн орон зайг энгийн байлган, аюулгүй байдал, нууцлал, цаашдын өсөлтийн чиглэлийг тайлбарлаж байна.',
-      welcome: 'Тавтай морил',
-      safety: 'Аюулгүй байдал ба нууцлал',
-      future: 'Цаашид хөгжих боломж',
+      body:
+        'Ховор өвчний туршлагаа хуваалцдаг хүмүүсийг аюулгүй, дэмжлэгтэй орчинд холбож, асуулт асуух, туршлага солилцох, ганцаардлыг багасгах орон зай.',
+      coreIdea: 'Холбоо, дэмжлэг, хамтын ойлголцол аюулгүй орчинд.',
+      primaryAction: 'Асуулт асуух',
+      secondaryAction: 'Дэмжлэгийн бүлэг үзэх',
+      supportTitle: 'Өөрт хэрэгтэй дэмжлэгээ хурдан олоорой',
+      supportItems: [
+        {
+          icon: '♡',
+          title: 'Ижил туршлагатай хүмүүстэй холбогдох',
+          body: 'Өвчтөн, асран хамгаалагч, гэр бүлийн гишүүд өөртэй тань төстэй зам туулж буй хүмүүсийг олоход тусална.',
+        },
+        {
+          icon: '?',
+          title: 'Чиглүүлэгтэй форум',
+          body: 'Өвчин, сэдэв, хэрэгцээгээр нь ангилсан асуулт, хэлэлцүүлэг нь мэдээллийг илүү эмх цэгцтэй болгоно.',
+        },
+        {
+          icon: '✦',
+          title: 'Мэдлэг ба туршлага хуваалцах',
+          body: 'Бодит амьдралын зөвлөгөө, асаргаа, оношилгоо, өдөр тутмын зохицуулалтын туршлагыг хуваалцана.',
+        },
+        {
+          icon: '●',
+          title: 'Ганцаардал ба гутаан доромжлолыг бууруулах',
+          body: 'Хүн бүр сонсогдож, ойлгогдож, хамт олон дунд багтаж байгаагаа мэдрэхэд чиглэнэ.',
+        },
+      ],
+      forumTitle: 'Чиглүүлэгтэй Q&A форум',
+      forumBody:
+        'Асуултаа өвчин, сэдэв, хэрэгцээгээр ангилж хайснаар зөв хүмүүс, зөв мэдээлэлд илүү хурдан хүрнэ.',
+      searchPlaceholder: 'Асуулт, өвчин, эсвэл сэдвээр хайх...',
+      allDiseases: 'Бүх өвчин',
+      allTopics: 'Бүх сэдэв',
+      groupTitle: 'Дэмжлэгийн бүлгүүд',
+      groupBody: 'Үүрэг, хэрэгцээ, нөхцөл байдлаар бүлгүүдэд нэгдэж дэмжлэг авах боломжтой.',
+      groups: [
+        {
+          role: 'Өвчтөн',
+          title: 'Rare Warriors өвчтөний хүрээлэл',
+          body: 'Ховор өвчинтэй амьдарч буй хүмүүс түүх, эх сурвалж, урам зориг хуваалцах орон зай.',
+          members: '14 гишүүн',
+        },
+        {
+          role: 'Асран хамгаалагч',
+          title: 'Caregiver Hearts сүлжээ',
+          body: 'Асран хамгаалагчид практик зөвлөгөө, сэтгэлзүйн дэмжлэг, өөрийгөө хамгаалах аргаа солилцоно.',
+          members: '14 гишүүн',
+        },
+        {
+          role: 'Гэр бүл',
+          title: 'Family Bonds дэмжлэгийн төв',
+          body: 'Гэр бүлийн гишүүд ойлголт, зөвлөгөө, ижил нөхцөлтэй хүмүүстэй холбоо олно.',
+          members: '14 гишүүн',
+        },
+      ],
+      storyTitle: 'Хуваалцсан туршлагууд',
+      storyBody: 'Бодит дуу хоолой, бодит зориг. Өөрийн түүхээ нэрээ нууцлан эсвэл нэртэйгээр хуваалцаарай.',
+      shareExperience: 'Туршлагаа хуваалцах',
+      shareExperienceTitle: 'Туршлагаа хуваалцах',
+      shareExperienceIntro:
+        'Таны түүх бусдад тайвшрал, зориг, ганцаараа биш гэсэн мэдрэмж өгч чадна. Өөрт тухтай хэмжээндээ хуваалцаарай.',
+      storyNameLabel: 'Нэр',
+      storyNamePlaceholder: 'Жишээ: Золбаяр Энх',
+      storyRoleLabel: 'Та хэн бэ?',
+      storyRolePatient: 'Өвчтөн',
+      storyRoleCaregiver: 'Асран хамгаалагч',
+      storyRoleFamily: 'Гэр бүлийн гишүүн',
+      storyRoleSupporter: 'Дэмжигч',
+      storyDiseaseLabel: 'Өвчин эсвэл нөхцөл байдал (заавал биш)',
+      storyDiseasePlaceholder: 'Жишээ: оношилгооны аялал, өдөр тутмын асаргаа',
+      storyMessageLabel: 'Таны түүх',
+      storyMessagePlaceholder:
+        'Юу тохиолдсон, юу тус болсон, бусдад ямар найдвар эсвэл зөвлөгөө өгөхийг хүсэж байгаагаа бичээрэй...',
+      storyGuideTitle: 'Оруулж болох гол зүйлс',
+      storyGuideItems: [
+        'Таны аяллын нэг чухал мөч',
+        'Танд тус болсон дэмжлэг, мэдээлэл, дадал',
+        'Ижил зам туулж буй хүмүүст хэлэх урам',
+        'Хуваалцахад тухгүй хувийн мэдээллээ орхих боломжтой',
+      ],
+      storyAnonymousLabel: 'Нэрээ нууцлан нийтлэх',
+      storyConsentLabel:
+        'Энэ түүх олон нийтэд харагдах боломжтойг ойлгож байна. Би өөрийн болон бусдын нууц, эмзэг мэдээллийг оруулахгүй.',
+      storyCancel: 'Цуцлах',
+      storySubmit: 'Түүхээ хуваалцах',
+      storyRequired: 'Түүхээ хамгийн багадаа 40 тэмдэгтээр бичиж, шаардлагатай зөвшөөрлийг тэмдэглэнэ үү.',
+      storySuccess: 'Таны түүх Shared Experiences хэсэгт нэмэгдлээ.',
+      storyAnonymousName: 'Нэрээ нууцалсан гишүүн',
+      stories: [
+        {
+          name: 'Золбаяр Энх',
+          role: 'Өвчтөн',
+          body:
+            'Онош сонссон эхний үед би бүрэн ганцаараа мэт санагдсан. Ижил зам туулж буй хүмүүс байгааг мэдэх нь үргэлжлүүлэх хүч өгдөг.',
+        },
+        {
+          name: 'Наранцэцэг Болд',
+          role: 'Асран хамгаалагч',
+          body:
+            'Зарим өдөр маш их ачаалалтай байдаг ч бусадтай холбогдох нь энэ аялалд ганцаараа биш гэдгийг сануулдаг.',
+        },
+      ],
+      promiseTitle: 'Аюулгүй орчны амлалт',
+      promiseItems: [
+        'Хүндэтгэлтэй, шүүмжлэлгүй харилцаа',
+        'Хувийн мэдээллийг хамгаалах зарчим',
+        'Модератортой, чиглүүлэгтэй хэлэлцүүлэг',
+        'Эмчийн зөвлөгөөг орлохгүй, харин дэмжлэг нэмэх орон зай',
+      ],
     },
     contact: {
       title: 'Холбоо барих',
@@ -551,6 +688,34 @@ export const dictionaries = {
           body: 'Read reflective guidance and emotional support content that feels calm rather than clinical.',
         },
       ],
+      donationImpactTitle: 'How Your Donation Helps',
+      donationImpactCards: [
+        {
+          icon: '♥',
+          title: 'Patient Support',
+          body: 'Provide financial assistance for medical-related needs and treatments.',
+        },
+        {
+          icon: '📖',
+          title: 'Information Access',
+          body: 'Create and translate reliable rare disease information in Mongolian.',
+        },
+        {
+          icon: '▣',
+          title: 'Platform Development',
+          body: 'Maintain and improve our platform to better serve the rare disease community.',
+        },
+        {
+          icon: '●',
+          title: 'Events & Community',
+          body: 'Organize awareness campaigns, support gatherings, and community events.',
+        },
+      ],
+      donationTrustTitle: 'Transparency & Trust',
+      donationTrustBody:
+        'We are committed to using all contributions responsibly and transparently. Every donation makes a meaningful impact.',
+      donationHopeTitle: 'Every contribution brings hope, strength, and support.',
+      donationHopeBody: 'Thank you for being part of the change.',
       donationQuote: '"We make a living by what we get, but we make a life by what we give."',
     },
     diseases: {
@@ -620,12 +785,15 @@ export const dictionaries = {
     },
     dailyCorner: {
       title: 'Daily Corner',
-      body: 'A quieter page for emotional support, reflection, and gentle daily reminders.',
+      body:
+        'Daily Corner offers short, meaningful insights each day to support your emotional well-being. It provides simple reflections, encouragement, and a moment of calm whenever you need it.',
+      accessibilityNote:
+        'Daily Corner also supports accessibility through an optional audio feature, allowing users to listen to entries instead of reading them. This can help people who are tired, visually strained, overwhelmed, or simply more comfortable with audio-based support.',
     },
     donation: {
       title: 'Donate',
       intro:
-        'Your donation helps Rare Care continue building trustworthy information, stronger support pathways, and everyday care resources for people with rare diseases in Mongolia.',
+        'Donations in Rare Care are used to support individuals living with rare diseases who face financial challenges in accessing specialized care. Contributions help improve access to reliable information, strengthen community support, and sustain a platform that connects and empowers patients across Mongolia.',
       donationType: 'Donation Type',
       oneTime: 'One-Time',
       monthly: 'Monthly',
@@ -679,10 +847,116 @@ export const dictionaries = {
     },
     community: {
       title: 'Community',
-      body: 'The MVP keeps community simple while setting expectations around privacy, safety, and future moderated support spaces.',
-      welcome: 'Welcome',
-      safety: 'Safety and privacy',
-      future: 'What comes next',
+      body:
+        'A safe, supportive space that connects people with shared rare disease experiences, guided communication, peer knowledge, and emotional support.',
+      coreIdea: 'Connection, support, and shared understanding in a safe space.',
+      primaryAction: 'Post a Question',
+      secondaryAction: 'Explore Support Groups',
+      supportTitle: 'Reach the support you need',
+      supportItems: [
+        {
+          icon: '♡',
+          title: 'Connect With Shared Experiences',
+          body: 'Find patients, caregivers, and families who understand similar rare disease journeys.',
+        },
+        {
+          icon: '?',
+          title: 'Guided Forum Communication',
+          body: 'Questions can be organized by disease, topic, and need so people reach the right support faster.',
+        },
+        {
+          icon: '✦',
+          title: 'Knowledge Sharing & Peer Support',
+          body: 'Share lived experience, care tips, diagnosis questions, and practical everyday guidance.',
+        },
+        {
+          icon: '●',
+          title: 'Reduce Isolation and Stigma',
+          body: 'Create a sense of belonging where people feel heard, understood, and emotionally supported.',
+        },
+      ],
+      forumTitle: 'Guided Q&A Forum',
+      forumBody:
+        'Search or filter by disease, topic, or need so questions become easier to find and safer to answer.',
+      searchPlaceholder: 'Search questions, diseases, or topics...',
+      allDiseases: 'All Diseases',
+      allTopics: 'All Topics',
+      groupTitle: 'Support Groups',
+      groupBody: 'Browse groups by role, condition, or support need so each person can find a relevant space.',
+      groups: [
+        {
+          role: 'Patient',
+          title: 'Rare Warriors Patient Circle',
+          body: 'A featured space for patients living with rare diseases to share stories, resources, and encouragement.',
+          members: '14 members',
+        },
+        {
+          role: 'Caregiver',
+          title: 'Caregiver Hearts Network',
+          body: 'A peer space for caregivers to exchange practical tips, emotional support, and self-care strategies.',
+          members: '14 members',
+        },
+        {
+          role: 'Family Member',
+          title: 'Family Bonds Support Hub',
+          body: 'A safe space for family members to find comfort, advice, and connection with others in similar situations.',
+          members: '14 members',
+        },
+      ],
+      storyTitle: 'Shared Experiences',
+      storyBody: 'Stories from the community: real voices, real courage. Share with your name or anonymously.',
+      shareExperience: 'Share Your Experience',
+      shareExperienceTitle: 'Share Your Experience',
+      shareExperienceIntro:
+        'Your story can bring comfort, courage, and a feeling of not being alone. Share as much or as little as you feel comfortable with.',
+      storyNameLabel: 'Name',
+      storyNamePlaceholder: 'Example: Zolbayar Enkh',
+      storyRoleLabel: 'Your role',
+      storyRolePatient: 'Patient',
+      storyRoleCaregiver: 'Caregiver',
+      storyRoleFamily: 'Family member',
+      storyRoleSupporter: 'Supporter',
+      storyDiseaseLabel: 'Condition or context (optional)',
+      storyDiseasePlaceholder: 'Example: diagnosis journey, daily care, treatment access',
+      storyMessageLabel: 'Your story',
+      storyMessagePlaceholder:
+        "Share your experience, what helped you, what you learned, or a message of hope for someone else...",
+      storyGuideTitle: 'Helpful things to include',
+      storyGuideItems: [
+        'One important moment in your journey',
+        'Support, information, or habits that helped you',
+        'Encouragement for someone with a similar experience',
+        'Only details you feel safe making public',
+      ],
+      storyAnonymousLabel: 'Post anonymously',
+      storyConsentLabel:
+        'I understand this story may be visible to the community and I will avoid sharing private or sensitive details about myself or others.',
+      storyCancel: 'Cancel',
+      storySubmit: 'Share Story',
+      storyRequired: 'Please write at least 40 characters and confirm the safety checkbox before sharing.',
+      storySuccess: 'Your story was added to Shared Experiences.',
+      storyAnonymousName: 'Anonymous member',
+      stories: [
+        {
+          name: 'Zolbayar Enkh',
+          role: 'Patient',
+          body:
+            'When I was first diagnosed, I felt completely alone. Finding others who understand this journey gives me strength to keep going.',
+        },
+        {
+          name: 'Narantsetseg Bold',
+          role: 'Caregiver',
+          body:
+            'Some days feel overwhelming, but connecting with others reminds me that I am not alone in this journey.',
+        },
+      ],
+      promiseTitle: 'Safe Space Promise',
+      promiseItems: [
+        'Respectful, judgment-free communication',
+        'Privacy-aware participation',
+        'Moderated and guided discussions',
+        'Support that complements, not replaces, medical care',
+      ],
     },
     contact: {
       title: 'Contact Us',
