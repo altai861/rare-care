@@ -1,0 +1,217 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.events }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy">
+        <h1>{{ dictionary.events.title }}</h1>
+        <p>{{ dictionary.events.body }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="container section event-list">
+    @if (isLoading) {
+      <div class="content-panel empty-state">
+        <p>{{ dictionary.common.sending }}</p>
+      </div>
+    } @else if (loadError) {
+      <div class="content-panel empty-state">
+        <p>{{ loadError }}</p>
+      </div>
+    } @else if (!events.length) {
+      <div class="content-panel empty-state">
+        <p>{{ dictionary.common.noResults }}</p>
+      </div>
+    } @else {
+      @for (event of events; track event.id) {
+        <article class="event-card tone-{{ event.image || 'forum' }}">
+          <div class="event-poster">
+            <div class="event-poster-topbar">
+              <div class="event-poster-brand">
+                <img [attr.alt]="dictionary.siteName + ' logo'" src="/logo.png" />
+                <span>{{ dictionary.events.posterBrand }}</span>
+              </div>
+              <div class="event-poster-date-block">
+                <div class="event-poster-date-badge">
+                  <strong>{{ posterDateDay(event) }}</strong>
+                  <span>{{ posterDateMonth(event) }}</span>
+                </div>
+                <p class="event-poster-kicker">{{ posterTheme(event) }}</p>
+              </div>
+            </div>
+
+            <div class="event-poster-body">
+              <div class="event-poster-copy">
+                <h2>{{ event.title }}</h2>
+                <p class="event-poster-summary">{{ event.summary }}</p>
+              </div>
+
+              <div class="event-poster-visual">
+                @if (posterBackdropImage(event)) {
+                  <img
+                    class="event-poster-backdrop"
+                    [src]="posterBackdropImage(event)"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                }
+                <div class="poster-portrait-frame">
+                  <img
+                    class="event-poster-illustration"
+                    [src]="posterImage(event)"
+                    [attr.alt]="posterImageAlt(event)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="event-poster-meta">
+              @if (posterTime(event)) {
+                <div class="event-poster-meta-item">
+                  <span class="event-poster-meta-icon event-poster-meta-icon-time" aria-hidden="true"></span>
+                  <div class="event-poster-meta-copy">
+                    <span>{{ dictionary.events.posterTime }}</span>
+                    <strong>{{ posterTime(event) }}</strong>
+                  </div>
+                </div>
+              }
+              @if (event.location) {
+                <div class="event-poster-meta-item">
+                  <span class="event-poster-meta-icon event-poster-meta-icon-place" aria-hidden="true"></span>
+                  <div class="event-poster-meta-copy">
+                    <span>{{ dictionary.events.posterPlace }}</span>
+                    <strong>{{ event.location }}</strong>
+                  </div>
+                </div>
+              }
+              @if (event.organizer) {
+                <div class="event-poster-meta-item">
+                  <span class="event-poster-meta-icon event-poster-meta-icon-organizer" aria-hidden="true"></span>
+                  <div class="event-poster-meta-copy">
+                    <span>{{ dictionary.events.organizer }}</span>
+                    <strong>{{ event.organizer }}</strong>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+          <div class="event-content">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.summary }}</p>
+            @if (event.description) {
+              <p>{{ event.description }}</p>
+            }
+            <dl class="event-meta">
+              <div>
+                <dt>📅</dt>
+                <dd>
+                  {{ formatDate(event.date) }}{{ event.startTime ? ' · ' + event.startTime : ''
+                  }}{{ event.endTime ? '-' + event.endTime : '' }}
+                </dd>
+              </div>
+              @if (event.organizer) {
+                <div class="field-group">
+                  <dt>👥</dt>
+                  <dd>{{ dictionary.events.organizer }}: {{ event.organizer }}</dd>
+                </div>
+              }
+              @if (event.location) {
+                <div class="field-group">
+                  <dt>⌖</dt>
+                  <dd>{{ dictionary.events.location }}: {{ event.location }}</dd>
+                </div>
+              }
+            </dl>
+            <button
+              class="secondary-button event-register-trigger"
+              type="button"
+              (click)="toggleRegistration(event)"
+            >
+              {{ isRegistering(event.id) ? dictionary.auth.close : dictionary.events.register }}
+            </button>
+
+            @if (isRegistering(event.id)) {
+              <form class="event-registration-form" (ngSubmit)="submitRegistration(event.id)">
+                <p class="event-registration-intro">{{ dictionary.events.registrationIntro }}</p>
+                <div class="two-column-grid">
+                  <div class="field-group">
+                    <label [for]="'event-name-' + event.id">{{ dictionary.events.name }}</label>
+                    <input
+                      [id]="'event-name-' + event.id"
+                      name="eventRegistrationName"
+                      [(ngModel)]="registrationForm.name"
+                    />
+                  </div>
+                  <div class="field-group">
+                    <label [for]="'event-email-' + event.id">{{ dictionary.events.email }}</label>
+                    <input
+                      [id]="'event-email-' + event.id"
+                      name="eventRegistrationEmail"
+                      type="email"
+                      [(ngModel)]="registrationForm.email"
+                    />
+                  </div>
+                  <div class="field-group">
+                    <label [for]="'event-phone-' + event.id">{{ dictionary.events.phone }}</label>
+                    <input
+                      [id]="'event-phone-' + event.id"
+                      name="eventRegistrationPhone"
+                      type="tel"
+                      [(ngModel)]="registrationForm.phone"
+                    />
+                  </div>
+                  <div class="field-group">
+                    <label [for]="'event-attendees-' + event.id">{{
+                      dictionary.events.attendees
+                    }}</label>
+                    <input
+                      [id]="'event-attendees-' + event.id"
+                      name="eventRegistrationAttendees"
+                      type="number"
+                      min="1"
+                      [(ngModel)]="registrationForm.attendees"
+                    />
+                  </div>
+                  <div class="field-group full-width">
+                    <label [for]="'event-note-' + event.id">{{ dictionary.events.note }}</label>
+                    <textarea
+                      [id]="'event-note-' + event.id"
+                      name="eventRegistrationNote"
+                      rows="4"
+                      [(ngModel)]="registrationForm.note"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="event-registration-actions">
+                  <button
+                    class="primary-button"
+                    type="submit"
+                    [disabled]="!isRegistrationValid() || registrationPending"
+                  >
+                    {{ registrationPending ? dictionary.common.sending : dictionary.common.submit }}
+                  </button>
+                  <button class="secondary-button" type="button" (click)="closeRegistration()">
+                    {{ dictionary.auth.close }}
+                  </button>
+                </div>
+                @if (registrationFeedback) {
+                  <div
+                    class="form-feedback"
+                    [class.is-success]="registrationFeedback.status === 'success'"
+                    [class.is-error]="registrationFeedback.status === 'error'"
+                  >
+                    <p>{{ registrationFeedback.message }}</p>
+                  </div>
+                }
+              </form>
+            }
+          </div>
+        </article>
+      }
+    }
+  </section>
+</div>

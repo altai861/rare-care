@@ -1,27 +1,36 @@
 {
   "name": "rare-care",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "test": "cd client && npm exec tsc -- --noEmit -p tsconfig.app.json",
+    "server": "node server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm --prefix client start",
+    "refresh:gard": "node scripts/generate-gard-index.mjs",
+    "build": "npm --prefix client run build -- --progress=false",
+    "start": "node server/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nkooooooo/rare-care.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Nkooooooo/rare-care/issues"
+  },
+  "homepage": "https://github.com/Nkooooooo/rare-care#readme",
   "dependencies": {
-    "@hookform/resolvers": "latest",
-    "better-sqlite3": "latest",
-    "lucide-react": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-hook-form": "latest",
-    "zod": "latest"
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "typescript": "latest"
+    "@angular/cli": "^21.2.6",
+    "concurrently": "^9.2.1"
   }
 }

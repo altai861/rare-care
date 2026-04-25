@@ -1,0 +1,131 @@
+<div class="page-stack">
+  <section class="home-hero">
+    <div class="container home-hero-grid">
+      <div class="hero-stage hero-stage-home">
+        <img
+          class="home-hero-image"
+          alt="Rare Care homepage cover artwork showing online rare disease support in Mongolia"
+          src="/home-page-image.png"
+        />
+      </div>
+      <div class="hero-content-card hero-content-below">
+        <h1>{{ dictionary.home.heroTitle }}</h1>
+        <p>{{ dictionary.home.heroBody }}</p>
+        <div class="hero-actions">
+          <a class="primary-button" [routerLink]="routeTo('/disease-information')">{{
+            dictionary.nav.diseaseInformation
+          }}</a>
+          <a class="secondary-button" [routerLink]="routeTo('/donation')">{{
+            dictionary.nav.donate
+          }}</a>
+        </div>
+        <p class="hero-aside">{{ dictionary.home.heroAside }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-heading">
+      <h2>{{ dictionary.home.aboutTitle }}</h2>
+    </div>
+    <div class="about-panel">
+      <div class="about-badge">{{ dictionary.home.aboutTitle }}</div>
+      <p>{{ dictionary.home.aboutBody }}</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-heading">
+      <h2>{{ dictionary.home.helpTitle }}</h2>
+    </div>
+    <div class="help-grid">
+      @for (card of dictionary.home.helpCards; track card.title; let index = $index) {
+        <article class="help-card">
+          <div class="help-icon" aria-hidden="true">✦</div>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.body }}</p>
+          <a [routerLink]="routeTo(helpRoutes[index])"
+            >{{ ctaLabel(index) }} <span aria-hidden="true">→</span></a
+          >
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-heading">
+      <h2>{{ dictionary.common.upcomingEvents }} & {{ dictionary.nav.dailyCorner }}</h2>
+    </div>
+    <div class="preview-grid">
+      <div class="preview-card">
+        <h3>{{ dictionary.common.upcomingEvents }}</h3>
+        @for (event of events; track event.id) {
+          <div>
+            <p class="preview-meta">
+              {{ formatMonthDay(event.date) }}{{ event.startTime ? ' · ' + event.startTime : '' }}
+            </p>
+            <h4>{{ event.title }}</h4>
+            <p>{{ event.summary }}</p>
+          </div>
+        }
+        <a [routerLink]="routeTo('/events')">{{ dictionary.common.learnMore }}</a>
+      </div>
+      <div class="preview-card is-tip">
+        <h3>{{ dictionary.common.everydayTips }}</h3>
+        @for (entry of entries; track entry.id) {
+          <div>
+            @if (entry.quote) {
+              <blockquote>{{ entry.quote }}</blockquote>
+            }
+            <p>{{ entry.reminderBody || entry.body }}</p>
+          </div>
+        }
+        <a [routerLink]="routeTo('/daily-corner')">{{ dictionary.common.readNow }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="donation-impact">
+      <div class="section-heading donation-impact-heading">
+        <h2>{{ dictionary.home.donationImpactTitle }}</h2>
+      </div>
+      <div class="donation-impact-strip">
+        @for (item of dictionary.home.donationImpactCards; track item.title) {
+          <article class="donation-impact-card">
+            <div class="donation-impact-icon" aria-hidden="true">{{ item.icon }}</div>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </div>
+          </article>
+        }
+      </div>
+      <div class="donation-impact-bottom">
+        <article class="donation-trust-card">
+          <div class="donation-impact-icon is-shield" aria-hidden="true">✓</div>
+          <div>
+            <h3>{{ dictionary.home.donationTrustTitle }}</h3>
+            <p>{{ dictionary.home.donationTrustBody }}</p>
+          </div>
+        </article>
+        <article class="donation-hope-card">
+          <div class="donation-hope-symbol" aria-hidden="true">♥</div>
+          <div>
+            <h3>{{ dictionary.home.donationHopeTitle }}</h3>
+            <p>{{ dictionary.home.donationHopeBody }}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section donation-quote-section">
+    <div class="donation-callout">
+      <p>{{ dictionary.home.donationQuote }}</p>
+      <a class="primary-button" [routerLink]="routeTo('/donation')">{{
+        dictionary.common.makeDonation
+      }}</a>
+    </div>
+  </section>
+</div>

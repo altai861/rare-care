@@ -1,0 +1,78 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.dailyCorner }}</span>
+    </nav>
+  </div>
+  <section class="page-hero">
+    <div class="container page-hero-inner daily-corner-hero-inner">
+      <div class="hero-figure daily-corner-hero-figure">
+        <img
+          class="daily-corner-guide-image"
+          [src]="heroImageSrc"
+          alt="Illustration of a smiling guide introducing Daily Corner"
+        />
+      </div>
+      <div class="page-hero-copy daily-corner-goal-copy">
+        <p class="eyebrow">{{ dictionary.nav.dailyCorner }}</p>
+        <h1>{{ dictionary.dailyCorner.title }}</h1>
+        <p class="daily-corner-description">{{ dictionary.dailyCorner.body }}</p>
+        <p class="daily-corner-accessibility">{{ dictionary.dailyCorner.accessibilityNote }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="container section daily-list">
+    @for (entry of entries; track entry.id; let index = $index) {
+      <article class="daily-entry" [class.is-reversed]="reversed(index)">
+        <div
+          class="daily-illustration"
+          [class.has-artwork]="!!imageSrc(entry)"
+          [class.is-placeholder]="!imageSrc(entry)"
+          [class.tone-calm]="illustrationTone(entry) === 'calm'"
+          [class.tone-listen]="illustrationTone(entry) === 'listen'"
+          [class.tone-balance]="illustrationTone(entry) === 'balance'"
+        >
+          @if (imageSrc(entry); as artwork) {
+            <img
+              class="daily-illustration-image"
+              [src]="artwork"
+              [alt]="imageAlt(entry)"
+              loading="lazy"
+            />
+          } @else {
+            <div class="daily-figure"></div>
+          }
+        </div>
+        <div class="daily-copy">
+          <p class="daily-date">{{ formatDate(entry.date) }}</p>
+          <h2>{{ entry.title }}</h2>
+          @if (entry.quote) {
+            <blockquote>{{ entry.quote }}</blockquote>
+          }
+          <p>{{ entry.body }}</p>
+          @if (entry.reminderTitle || entry.reminderBody || entry.audioUrl) {
+            <div class="daily-support-strip">
+              @if (entry.reminderTitle || entry.reminderBody) {
+                <div class="reminder-box">
+                  @if (entry.reminderTitle) {
+                    <h3>{{ entry.reminderTitle }}</h3>
+                  }
+                  @if (entry.reminderBody) {
+                    <p>{{ entry.reminderBody }}</p>
+                  }
+                </div>
+              }
+              @if (entry.audioUrl) {
+                <div class="daily-audio-inline">
+                  <p class="daily-audio-label">♫ {{ dictionary.common.audio }}</p>
+                  <audio controls preload="none" [src]="entry.audioUrl"></audio>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </article>
+    }
+  </section>
+</div>

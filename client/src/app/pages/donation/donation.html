@@ -1,0 +1,220 @@
+<div class="page-stack">
+  <div class="container section-tight">
+    <nav class="breadcrumbs">
+      <a [routerLink]="routeTo()">{{ dictionary.common.home }}</a
+      ><span class="breadcrumb-separator">/</span><span>{{ dictionary.nav.donate }}</span>
+    </nav>
+  </div>
+  <section class="container section donation-impact-section">
+    <div class="donation-impact-panel">
+      <div class="donation-impact-intro">
+        <p class="donation-impact-kicker">{{ dictionary.home.donationImpactTitle }}</p>
+        <h2>{{ dictionary.home.donationHopeTitle }}</h2>
+        <p>{{ dictionary.home.donationTrustBody }}</p>
+      </div>
+      <div class="donation-impact-list">
+        @for (item of dictionary.home.donationImpactCards; track item.title) {
+          <article class="donation-impact-item">
+            <span aria-hidden="true">{{ item.icon }}</span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+  <section class="container section">
+    <div class="form-shell">
+      <form class="donation-form" (ngSubmit)="submit()">
+        <section class="form-panel">
+          <h2>{{ dictionary.donation.donationType }}</h2>
+          <div class="choice-row">
+            <label class="radio-card"
+              ><input
+                name="donationType"
+                type="radio"
+                value="one_time"
+                [(ngModel)]="form.donationType"
+              /><span [class.is-selected]="form.donationType === 'one_time'">{{
+                dictionary.donation.oneTime
+              }}</span></label
+            ><label class="radio-card"
+              ><input
+                name="donationType"
+                type="radio"
+                value="monthly"
+                [(ngModel)]="form.donationType"
+              /><span [class.is-selected]="form.donationType === 'monthly'">{{
+                dictionary.donation.monthly
+              }}</span></label
+            >
+          </div>
+        </section>
+        <section class="form-panel">
+          <h2>{{ dictionary.donation.amount }}</h2>
+          <div class="amount-grid">
+            @for (amount of presetAmounts; track amount) {
+              <button
+                type="button"
+                [class.is-selected]="form.amount === amount && !customAmount"
+                (click)="selectAmount(amount)"
+              >
+                ${{ amount }}
+              </button>
+            }
+            <label class="other-amount"
+              ><span>{{ dictionary.common.other }}</span
+              ><input
+                name="customAmount"
+                type="number"
+                inputmode="numeric"
+                [(ngModel)]="customAmount"
+                (ngModelChange)="updateCustomAmount()"
+                placeholder="0"
+            /></label>
+          </div>
+          <div class="two-column-grid compact">
+            <div class="field-group">
+              <label for="dedicateTo">{{ dictionary.donation.dedicateTo }}</label
+              ><input id="dedicateTo" name="dedicateTo" type="text" [(ngModel)]="form.dedicateTo" />
+            </div>
+            <div class="field-group">
+              <label for="note">{{ dictionary.donation.note }}</label
+              ><input id="note" name="note" type="text" [(ngModel)]="form.note" />
+            </div>
+          </div>
+        </section>
+        <section class="form-panel">
+          <h2>{{ dictionary.donation.yourInfo }}</h2>
+          <div class="two-column-grid">
+            <div class="field-group">
+              <label for="firstName">{{ dictionary.donation.firstName }}</label
+              ><input id="firstName" name="firstName" required [(ngModel)]="form.firstName" />
+            </div>
+            <div class="field-group">
+              <label for="lastName">{{ dictionary.donation.lastName }}</label
+              ><input id="lastName" name="lastName" required [(ngModel)]="form.lastName" />
+            </div>
+            <div class="field-group full-width">
+              <label for="address">{{ dictionary.donation.address }}</label
+              ><input id="address" name="address" required [(ngModel)]="form.address" />
+            </div>
+            <div class="field-group">
+              <label for="country">{{ dictionary.donation.country }}</label
+              ><select id="country" name="country" [(ngModel)]="form.country">
+                <option value="Mongolia">Mongolia</option>
+                <option value="China">China</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Japan">Japan</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="stateProvince">{{ dictionary.donation.stateProvince }}</label
+              ><input
+                id="stateProvince"
+                name="stateProvince"
+                required
+                [(ngModel)]="form.stateProvince"
+              />
+            </div>
+            <div class="field-group">
+              <label for="city">{{ dictionary.donation.city }}</label
+              ><input id="city" name="city" required [(ngModel)]="form.city" />
+            </div>
+            <div class="field-group">
+              <label for="postalCode">{{ dictionary.donation.postalCode }}</label
+              ><input id="postalCode" name="postalCode" required [(ngModel)]="form.postalCode" />
+            </div>
+            <div class="field-group">
+              <label for="email">{{ dictionary.donation.email }}</label
+              ><input id="email" name="email" type="email" required [(ngModel)]="form.email" />
+            </div>
+            <div class="field-group">
+              <label for="phone">{{ dictionary.donation.phone }}</label
+              ><input id="phone" name="phone" type="tel" [(ngModel)]="form.phone" />
+            </div>
+          </div>
+        </section>
+        <section class="form-panel">
+          <h2>{{ dictionary.donation.payment }}</h2>
+          <div class="payment-summary">
+            <strong>{{ dictionary.donation.totalAmount }}</strong
+            ><span>${{ form.amount || 0 }}</span>
+          </div>
+          <div class="choice-row">
+            <label class="radio-card"
+              ><input
+                name="paymentType"
+                type="radio"
+                value="credit_card"
+                [(ngModel)]="form.paymentType"
+              /><span [class.is-selected]="form.paymentType === 'credit_card'">{{
+                dictionary.donation.creditCard
+              }}</span></label
+            ><label class="radio-card"
+              ><input
+                name="paymentType"
+                type="radio"
+                value="qpay"
+                [(ngModel)]="form.paymentType"
+              /><span [class.is-selected]="form.paymentType === 'qpay'">{{
+                dictionary.donation.qpay
+              }}</span></label
+            >
+          </div>
+        </section>
+        <section class="form-panel">
+          <label class="checkbox-row"
+            ><input
+              name="consentAccepted"
+              type="checkbox"
+              [(ngModel)]="form.consentAccepted"
+            /><span>{{ dictionary.donation.consent }}</span></label
+          ><label class="captcha-placeholder"
+            ><input name="captchaPassed" type="checkbox" [(ngModel)]="form.captchaPassed" /><span>{{
+              dictionary.donation.captcha
+            }}</span></label
+          ><button
+            class="primary-button submit-button"
+            type="submit"
+            [disabled]="!isValid() || isSubmitting"
+          >
+            {{ isSubmitting ? dictionary.common.sending : dictionary.common.submit }}
+          </button>
+        </section>
+      </form>
+      <aside class="form-sidebar">
+        <div class="sidebar-illustration donation-sidebar-illustration">
+          <img
+            class="donation-sidebar-image"
+            [src]="heroImageSrc"
+            alt="Hands supporting a heart symbol for donation and community care"
+            decoding="async"
+          />
+        </div>
+        <div class="sidebar-copy">
+          <h2>{{ dictionary.donation.title }}</h2>
+          <p>{{ dictionary.donation.intro }}</p>
+        </div>
+      </aside>
+      @if (feedback) {
+        <div
+          class="form-feedback"
+          [class.is-success]="feedback.status === 'success'"
+          [class.is-error]="feedback.status === 'error'"
+        >
+          <h3>
+            {{
+              feedback.status === 'success'
+                ? dictionary.donation.successTitle
+                : dictionary.common.generalError
+            }}
+          </h3>
+          <p>{{ feedback.message }}</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>

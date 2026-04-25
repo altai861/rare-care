@@ -1,0 +1,382 @@
+<div class="site-root">
+  <header class="site-header">
+    <div class="container header-topline">
+      <a class="brand-link" [routerLink]="route()">
+        <span class="site-logo site-logo-medium"
+          ><img [attr.alt]="dictionary.siteName + ' logo'" src="/logo.png"
+        /></span>
+        <span class="brand-wordmark"
+          ><strong>{{ dictionary.siteName }}</strong
+          ><span>{{ dictionary.common.siteRegion }}</span></span
+        >
+      </a>
+      <nav class="header-utility" aria-label="Top utility navigation">
+        @for (item of navTargets.slice(0, 3); track item.key) {
+          <a [routerLink]="route(item.path)">{{ item.label() }}</a>
+        }
+        <div class="header-toggles" role="group" aria-label="Display preferences">
+          <button
+            class="icon-toggle language-toggle"
+            type="button"
+            (click)="toggleLanguage()"
+            [attr.aria-label]="nextLanguageLabel()"
+          >
+            <img [src]="languageIcon()" alt="" />
+            <span>{{ locale === 'mn' ? 'MN' : 'EN' }}</span>
+          </button>
+          <button
+            class="icon-toggle theme-toggle"
+            type="button"
+            (click)="toggleTheme()"
+            [attr.aria-label]="nextThemeLabel()"
+          >
+            <img [src]="themeIcon()" alt="" />
+            <span>{{ themeMode === 'light' ? 'Light' : 'Dark' }}</span>
+          </button>
+        </div>
+        @if (authUser) {
+          <div class="auth-menu" (click)="$event.stopPropagation()">
+            <button
+              class="auth-menu-trigger"
+              type="button"
+              [attr.aria-expanded]="authMenuOpen"
+              [attr.title]="dictionary.auth.signedInAs + ': ' + authUser.email"
+              (click)="toggleAuthMenu($event)"
+            >
+              <img class="auth-avatar" [src]="profileImage()" alt="" />
+              <span class="auth-menu-name">{{ authUser.name }}</span>
+              <span class="auth-menu-chevron" aria-hidden="true">▾</span>
+            </button>
+            @if (authMenuOpen) {
+              <div class="auth-dropdown">
+                <a [routerLink]="route('/profile')" (click)="closeAuthMenu()">{{
+                  dictionary.auth.profile
+                }}</a>
+                @if (isAdmin()) {
+                  <a [routerLink]="route('/user-management')" (click)="closeAuthMenu()">{{
+                    dictionary.auth.userManagement
+                  }}</a>
+                  <a [routerLink]="route('/event-management')" (click)="closeAuthMenu()">{{
+                    dictionary.auth.eventManagement
+                  }}</a>
+                  <a [routerLink]="route('/daily-corner-management')" (click)="closeAuthMenu()">{{
+                    dictionary.auth.dailyCornerManagement
+                  }}</a>
+                  <a [routerLink]="route('/disease-management')" (click)="closeAuthMenu()">{{
+                    dictionary.auth.diseaseManagement
+                  }}</a>
+                }
+                <button type="button" (click)="logout()">{{ dictionary.auth.logout }}</button>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="auth-inline">
+            <button class="auth-trigger-button" type="button" (click)="openAuthModal('login')">
+              {{ dictionary.auth.account }}
+            </button>
+          </div>
+        }
+      </nav>
+    </div>
+    <div class="container header-main">
+      <div class="header-main-actions">
+        <nav class="header-nav" aria-label="Primary">
+          @for (item of navTargets.slice(3); track item.key) {
+            <a [routerLink]="route(item.path)" routerLinkActive="is-active">{{ item.label() }}</a>
+          }
+          <a class="donate-link" [routerLink]="route('/donation')" routerLinkActive="is-active">{{
+            dictionary.nav.donate
+          }}</a>
+        </nav>
+        <form class="header-search" role="search" (ngSubmit)="submitSearch()">
+          <label class="sr-only" for="header-search">{{ dictionary.common.search }}</label>
+          <input
+            id="header-search"
+            name="query"
+            type="search"
+            [(ngModel)]="searchQuery"
+            [placeholder]="dictionary.nav.searchPlaceholder"
+          />
+          <button [attr.aria-label]="dictionary.common.search" type="submit">⌕</button>
+        </form>
+      </div>
+      <button
+        class="mobile-menu-toggle"
+        type="button"
+        [attr.aria-expanded]="menuOpen"
+        [attr.aria-label]="menuOpen ? dictionary.common.closeMenu : dictionary.common.openMenu"
+        (click)="toggleMenu()"
+      >
+        {{ menuOpen ? 'X' : '☰' }}
+      </button>
+    </div>
+    @if (menuOpen) {
+      <div class="mobile-panel">
+        <div class="container mobile-panel-inner">
+          @for (item of navTargets; track item.key) {
+            <a [routerLink]="route(item.path)">{{ item.label() }}</a>
+          }
+          <a [routerLink]="route('/donation')">{{ dictionary.nav.donate }}</a>
+          <div class="header-toggles mobile-header-toggles" role="group" aria-label="Display preferences">
+            <button
+              class="icon-toggle language-toggle"
+              type="button"
+              (click)="toggleLanguage()"
+              [attr.aria-label]="nextLanguageLabel()"
+            >
+              <img [src]="languageIcon()" alt="" />
+              <span>{{ locale === 'mn' ? 'MN' : 'EN' }}</span>
+            </button>
+            <button
+              class="icon-toggle theme-toggle"
+              type="button"
+              (click)="toggleTheme()"
+              [attr.aria-label]="nextThemeLabel()"
+            >
+              <img [src]="themeIcon()" alt="" />
+              <span>{{ themeMode === 'light' ? 'Light' : 'Dark' }}</span>
+            </button>
+          </div>
+          @if (authUser) {
+            <div class="mobile-account-panel">
+              <img class="auth-avatar" [src]="profileImage()" alt="" />
+              <div class="mobile-account-copy">
+                <strong>{{ authUser.name }}</strong>
+                <span>{{ authUser.email }}</span>
+              </div>
+            </div>
+            <div class="auth-inline mobile-auth-inline">
+              <a class="auth-user-pill" [routerLink]="route('/profile')">
+                {{ dictionary.auth.profile }}
+              </a>
+              @if (isAdmin()) {
+                <a class="auth-user-pill" [routerLink]="route('/user-management')">
+                  {{ dictionary.auth.userManagement }}
+                </a>
+                <a class="auth-user-pill" [routerLink]="route('/event-management')">
+                  {{ dictionary.auth.eventManagement }}
+                </a>
+                <a class="auth-user-pill" [routerLink]="route('/daily-corner-management')">
+                  {{ dictionary.auth.dailyCornerManagement }}
+                </a>
+                <a class="auth-user-pill" [routerLink]="route('/disease-management')">
+                  {{ dictionary.auth.diseaseManagement }}
+                </a>
+              }
+              <button class="auth-logout-button" type="button" (click)="logout()">
+                {{ dictionary.auth.logout }}
+              </button>
+            </div>
+          } @else {
+            <div class="auth-inline mobile-auth-inline">
+              <button class="auth-trigger-button" type="button" (click)="openAuthModal('login')">
+                {{ dictionary.auth.account }}
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </header>
+
+  @if (authModalOpen) {
+    <div class="auth-modal-backdrop" (click)="closeAuthModal()">
+      <div
+        class="auth-modal"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-labelledby]="'auth-modal-title'"
+        (click)="$event.stopPropagation()"
+      >
+        <button
+          class="auth-close"
+          type="button"
+          [attr.aria-label]="dictionary.auth.close"
+          (click)="closeAuthModal()"
+        >
+          X
+        </button>
+        <div class="auth-tabs auth-tabs-spaced">
+          <button
+            type="button"
+            [class.is-active]="authMode === 'login'"
+            (click)="switchAuthMode('login')"
+          >
+            {{ dictionary.auth.login }}
+          </button>
+          <button
+            type="button"
+            [class.is-active]="authMode === 'register'"
+            (click)="switchAuthMode('register')"
+          >
+            {{ dictionary.auth.register }}
+          </button>
+        </div>
+        @if (authMode === 'login') {
+          <form class="auth-form" #loginNgForm="ngForm" novalidate (ngSubmit)="submitLogin(loginNgForm)">
+            <h2 id="auth-modal-title">{{ dictionary.auth.loginTitle }}</h2>
+            <p>{{ dictionary.auth.loginBody }}</p>
+            <div class="field-group">
+              <label for="auth-login-email">{{ dictionary.auth.loginIdentifier }}</label>
+              <input
+                id="auth-login-email"
+                name="authLoginIdentifier"
+                type="text"
+                #loginIdentifier="ngModel"
+                [(ngModel)]="loginForm.identifier"
+                [class.is-invalid]="isFieldInvalid(loginIdentifier, loginNgForm)"
+                required
+              />
+              @if (loginIdentifierError(loginIdentifier, loginNgForm)) {
+                <p class="field-error">{{ loginIdentifierError(loginIdentifier, loginNgForm) }}</p>
+              }
+            </div>
+            <div class="field-group">
+              <label for="auth-login-password">{{ dictionary.auth.password }}</label>
+              <input
+                id="auth-login-password"
+                name="authLoginPassword"
+                type="password"
+                #loginPassword="ngModel"
+                [(ngModel)]="loginForm.password"
+                [class.is-invalid]="isFieldInvalid(loginPassword, loginNgForm)"
+                minlength="8"
+                required
+              />
+              @if (passwordError(loginPassword, loginNgForm)) {
+                <p class="field-error">{{ passwordError(loginPassword, loginNgForm) }}</p>
+              }
+            </div>
+            @if (authError) {
+              <p class="field-error">{{ authError }}</p>
+            }
+            <button class="primary-button" type="submit" [disabled]="authPending">
+              {{ authPending ? dictionary.common.sending : dictionary.auth.loginCta }}
+            </button>
+          </form>
+        } @else {
+          <form class="auth-form" #registerNgForm="ngForm" novalidate (ngSubmit)="submitRegister(registerNgForm)">
+            <h2 id="auth-modal-title">{{ dictionary.auth.registerTitle }}</h2>
+            <p>{{ dictionary.auth.registerBody }}</p>
+            <div class="field-group">
+              <label for="auth-register-name">{{ dictionary.auth.name }}</label>
+              <input
+                id="auth-register-name"
+                name="authRegisterName"
+                type="text"
+                #registerName="ngModel"
+                [(ngModel)]="registerForm.name"
+                [class.is-invalid]="isFieldInvalid(registerName, registerNgForm)"
+                minlength="2"
+                required
+              />
+              @if (registerNameError(registerName, registerNgForm)) {
+                <p class="field-error">{{ registerNameError(registerName, registerNgForm) }}</p>
+              }
+            </div>
+            <div class="field-group">
+              <label for="auth-register-email">{{ dictionary.auth.email }}</label>
+              <input
+                id="auth-register-email"
+                name="authRegisterEmail"
+                type="email"
+                #registerEmail="ngModel"
+                [(ngModel)]="registerForm.email"
+                [class.is-invalid]="isFieldInvalid(registerEmail, registerNgForm)"
+                required
+                email
+              />
+              @if (emailError(registerEmail, registerNgForm)) {
+                <p class="field-error">{{ emailError(registerEmail, registerNgForm) }}</p>
+              }
+            </div>
+            <div class="field-group">
+              <label for="auth-register-password">{{ dictionary.auth.password }}</label>
+              <input
+                id="auth-register-password"
+                name="authRegisterPassword"
+                type="password"
+                #registerPassword="ngModel"
+                [(ngModel)]="registerForm.password"
+                [class.is-invalid]="isFieldInvalid(registerPassword, registerNgForm)"
+                minlength="8"
+                required
+              />
+              @if (passwordError(registerPassword, registerNgForm)) {
+                <p class="field-error">{{ passwordError(registerPassword, registerNgForm) }}</p>
+              }
+            </div>
+            <div class="field-group">
+              <label for="auth-register-confirm">{{ dictionary.auth.confirmPassword }}</label>
+              <input
+                id="auth-register-confirm"
+                name="authRegisterConfirmPassword"
+                type="password"
+                #registerConfirmPassword="ngModel"
+                [(ngModel)]="registerForm.confirmPassword"
+                [class.is-invalid]="isFieldInvalid(registerConfirmPassword, registerNgForm) || (registerNgForm.submitted && registerForm.password !== registerForm.confirmPassword)"
+                minlength="8"
+                required
+              />
+              @if (confirmPasswordError(registerConfirmPassword, registerNgForm)) {
+                <p class="field-error">{{ confirmPasswordError(registerConfirmPassword, registerNgForm) }}</p>
+              }
+            </div>
+            <p class="field-help">{{ dictionary.auth.passwordHint }}</p>
+            @if (authError) {
+              <p class="field-error">{{ authError }}</p>
+            }
+            <button class="primary-button" type="submit" [disabled]="authPending">
+              {{ authPending ? dictionary.common.sending : dictionary.auth.createAccount }}
+            </button>
+          </form>
+        }
+      </div>
+    </div>
+  }
+
+  <main>
+    <router-outlet />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="site-logo site-logo-large"
+          ><img [attr.alt]="dictionary.siteName + ' logo'" src="/logo.png"
+        /></span>
+        <div>
+          <h2>{{ dictionary.siteName }}</h2>
+          <p>{{ dictionary.footer.tagline }}</p>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.quickLinks }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route()">{{ dictionary.common.home }}</a
+          ><a [routerLink]="route('/disease-information')">{{
+            dictionary.nav.diseaseInformation
+          }}</a
+          ><a [routerLink]="route('/events')">{{ dictionary.nav.events }}</a
+          ><a [routerLink]="route('/daily-corner')">{{ dictionary.nav.dailyCorner }}</a>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.support }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route('/community')">{{ dictionary.nav.community }}</a
+          ><a [routerLink]="route('/donation')">{{ dictionary.nav.donate }}</a
+          ><a [routerLink]="route('/contact')">{{ dictionary.nav.contact }}</a>
+        </div>
+      </div>
+      <div>
+        <h3>{{ dictionary.footer.legal }}</h3>
+        <div class="footer-links">
+          <a [routerLink]="route('/privacy-policy')">{{ dictionary.footer.privacy }}</a
+          ><a [routerLink]="route('/disclaimer')">{{ dictionary.footer.disclaimer }}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
